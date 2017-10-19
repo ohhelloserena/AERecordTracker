@@ -3,9 +3,10 @@ package com.duke.controller;
 
 import com.duke.Dao.recordDao;
 import com.duke.Entity.record;
-import com.sun.org.apache.xpath.internal.operations.String;
+//import com.sun.org.apache.xpath.internal.operations.String;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,6 @@ public class GetController {
 //    }
 
 
-/*
-
     @CrossOrigin
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
@@ -41,27 +40,44 @@ public class GetController {
         obj.put("results", results);
         return obj.toString();
     }
-    */
 
+
+
+    @CrossOrigin
+    @ResponseBody @RequestMapping(value = "/title", method = RequestMethod.GET,consumes= MediaType.APPLICATION_JSON_VALUE)
+    public java.lang.String SearchRecordsByTitle(@RequestBody String params) {
+        System.out.print("this SearchRecordsByTitle respond happened");
+        JSONObject obj = new JSONObject();
+        JSONObject jsonObj = new JSONObject(params);
+        String liketitle= "%"+jsonObj.getString("title")+"%";
+        String likeNumber= "%"+jsonObj.getString("Number")+"%";
+
+        List<record> results=RecordDao.SearchRecordsByTitle(liketitle,likeNumber);
+        obj.put("results", results);
+        return obj.toString();
+    }
 
     /**
-     * GET request
-     * URI: /records?consignmentCode=<xyz>
+     * /records/ConsignmentCode
      *
+     * Ex: {consignmentCode: "445810223"}
+     * @param params
      * @return
      */
 
     @CrossOrigin
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ResponseBody
-    public java.lang.String handlerRecordsByConsignment(@RequestParam("consignmentCode") String cCode) {
-        System.out.print("this respond happened");
+    @ResponseBody @RequestMapping(value = "/consignmentCode", method = RequestMethod.GET,consumes= MediaType.APPLICATION_JSON_VALUE)
+    public java.lang.String SearchRecordsByConsignmentCode(@RequestBody String params) {
+        System.out.print("this SearchRecordsByConsignmentCode respond happened");
         JSONObject obj = new JSONObject();
+        JSONObject jsonObj = new JSONObject(params);
+        String likeConsignment= jsonObj.getString("consignmentCode");
 
-        List<record> results = RecordDao.getRecordbyConsignmentCode(java.lang.String.valueOf(cCode));
+        List<record> results=RecordDao.SearchRecordsByConsignmentCode(likeConsignment);
         obj.put("results", results);
         return obj.toString();
     }
+
 
 }
 

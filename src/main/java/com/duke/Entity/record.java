@@ -8,26 +8,36 @@ public class record {
     private Integer AttrId;
     private Integer RecordId;
     private String Value;
+    private String title;
+    private String number;
+    private int scheduleId;
+    private int typeId;
+    private int stateId;
+    private int containerId;
+    private int locationId;
+    private java.sql.Date createdAt;
+    private java.sql.Date updatedAt;
+    private java.sql.Date closedAt;
     private String consignmentCode;
-    private String recordNumber;
-    private String recordTitle;
-    private String recordStateName;
-    private Date recordCreatedAt;
-    private Date recordClosedAt;
-    private Date recordUpdatedAt;
 
-    public record(int id, int AttrId, int RecordId, String Value, String consignmentCode, String recordNumber, String recordTitle, String recordStateName, Date recordCreatedAt, Date recordClosedAt, Date recordUpdatedAt){
+
+
+    public record(int id, int AttrId, int RecordId, String Value, String title, String number, int scheduleId, int typeId, int stateId, int containerId, int locationId, java.sql.Date createdAt, java.sql.Date updatedAt, java.sql.Date closedAt, String consignmentCode){
         this.id= id;
         this.AttrId = AttrId;
         this.RecordId=RecordId;
         this.Value = Value;
+        this.title = title;
+        this.number = number;
+        this.scheduleId = scheduleId;
+        this.typeId = typeId;
+        this.stateId = stateId;
+        this.containerId = containerId;
+        this.locationId = locationId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.closedAt = closedAt;
         this.consignmentCode = consignmentCode;
-        this.recordNumber = recordNumber;
-        this.recordTitle = recordTitle;
-        this.recordStateName = recordStateName;
-        this.recordCreatedAt = recordCreatedAt;
-        this.recordClosedAt = recordClosedAt;
-        this.recordUpdatedAt = recordUpdatedAt;
     }
 
     // default constructor
@@ -65,59 +75,91 @@ public class record {
         Value = value;
     }
 
-    public String getRecordNumber() {
-        return recordNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public void setRecordNumber(String recordNumber) {
-        this.recordNumber = recordNumber;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getRecordTitle() {
-        return recordTitle;
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
-    public void setRecordTitle(String recordTitle) {
-        this.recordTitle = recordTitle;
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
-    public String getRecordStateName() {
-        return recordStateName;
+    public void setStateId(int stateId) {
+        this.stateId = stateId;
     }
 
-    public void setRecordStateName(String recordStateName) {
-        this.recordStateName = recordStateName;
+    public void setContainerId(int containerId) {
+        this.containerId = containerId;
     }
 
-    public Date getRecordCreatedAt() {
-        return recordCreatedAt;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
-    public void setRecordCreatedAt(Date recordCreatedAt) {
-        this.recordCreatedAt = recordCreatedAt;
+    public void setCreatedAt(java.sql.Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getRecordClosedAt() {
-        return recordClosedAt;
+    public void setUpdatedAt(java.sql.Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public void setRecordClosedAt(Date recordClosedAt) {
-        this.recordClosedAt = recordClosedAt;
+    public void setClosedAt(java.sql.Date closedAt) {
+        this.closedAt = closedAt;
     }
 
-    public Date getRecordUpdatedAt() {
-        return recordUpdatedAt;
+    public String getTitle() {
+        return title;
     }
 
-    public void setRecordUpdatedAt(Date recordUpdatedAt) {
-        this.recordUpdatedAt = recordUpdatedAt;
+    public String getNumber() {
+        return number;
     }
 
-    public String getConsignmentCode() {
-        return consignmentCode;
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public int getStateId() {
+        return stateId;
+    }
+
+    public int getContainerId() {
+        return containerId;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public java.sql.Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public java.sql.Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public java.sql.Date getClosedAt() {
+        return closedAt;
     }
 
     public void setConsignmentCode(String consignmentCode) {
         this.consignmentCode = consignmentCode;
+    }
+
+    public String getConsignmentCode() {
+        return consignmentCode;
     }
 }

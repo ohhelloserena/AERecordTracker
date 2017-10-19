@@ -1,6 +1,7 @@
 package com.duke.Dao;
 
 import com.duke.Entity.record;
+import com.sun.prism.impl.Disposer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -25,10 +26,10 @@ public class recordDao {
     private JdbcTemplate jdbcTemplate;
 
 
-    public List<record> getRecordById(){
+    public List<record> getRecordById() {
         final String sql = "SELECT Id,AttrId,RecordId,Value  FROM customattributevalues LIMIT 0,5";
         List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
-            public record mapRow(ResultSet resultSet, int Id) throws SQLException{
+            public record mapRow(ResultSet resultSet, int Id) throws SQLException {
                 record records = new record();
                 records.setId(resultSet.getInt("Id"));
                 records.setAttrId(resultSet.getInt("AttrId"));
@@ -41,31 +42,65 @@ public class recordDao {
         return Record;
     }
 
-    /**
-     *
-     * @param cCode - {string} The consignment code to be searched.
-     * @return
-     */
-    public List<record> getRecordbyConsignmentCode(java.lang.String cCode){
-        //final String sql = "SELECT recordr.records.ConsignmentCode, recordr.records.Number, recordr.records.Title, recordr.recordstates.Name, recordr.records.CreatedAt, recordr.records.UpdatedAt, recordr.records.ClosedAt  FROM recordr.records, recordr.recordstates WHERE recordr.records.StateId = recordr.recordstates.Id AND recordr.records.ConsignmentCode = "580531982";";
+    public List<record> SearchRecordsByTitle(String title, String Number) {
 
-        final String sql = "SELECT recordr.records.ConsignmentCode, recordr.records.Number, recordr.records.Title, recordr.recordstates.Name FROM recordr.records, recordr.recordstates WHERE recordr.records.StateId = recordr.recordstates.Id AND recordr.records.ConsignmentCode =" + cCode;
-
+        String likeExpression = "%" + title + "%";
+        final String sql = "SELECT * FROM records WHERE Title Like ? AND Number Like ?  LIMIT 0,5";
         List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
-            public record mapRow(ResultSet resultSet, int Id) throws SQLException{
+            public record mapRow(ResultSet resultSet, int Id) throws SQLException  {
                 record records = new record();
+                records.setId(resultSet.getInt("Id"));
+                records.setNumber(resultSet.getString("Number"));
+                records.setTitle(resultSet.getString("Title"));
+                records.setScheduleId(resultSet.getInt("ScheduleId"));
+                records.setTypeId(resultSet.getInt("TypeId"));
                 records.setConsignmentCode(resultSet.getString("ConsignmentCode"));
-                records.setRecordNumber(resultSet.getString("Number"));
-                records.setRecordTitle(resultSet.getString("Title"));
-                records.setRecordStateName(resultSet.getString("Name"));
+                records.setStateId(resultSet.getInt("StateId"));
+                records.setContainerId(resultSet.getInt("ContainerId"));
+                records.setLocationId(resultSet.getInt("LocationId"));
+                records.setCreatedAt(resultSet.getDate("CreatedAt"));
+                records.setUpdatedAt(resultSet.getDate("UpdatedAt"));
+                records.setClosedAt(resultSet.getDate("ClosedAt"));
                 System.out.print(records);
                 return records;
             }
-        });
+        }, title, Number);
         return Record;
-
     }
 
+    /**
+     * Search by ConsignmentCode.
+     *
+     * @param consignmentCode
+     * @return
+     */
 
+    public List<record> SearchRecordsByConsignmentCode(String consignmentCode) {
+        final String sql = "SELECT * FROM records WHERE ConsignmentCode = ?";
+        List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
+            public record mapRow(ResultSet resultSet, int Id) throws SQLException  {
+                record records = new record();
+                records.setId(resultSet.getInt("Id"));
+                records.setNumber(resultSet.getString("Number"));
+                records.setTitle(resultSet.getString("Title"));
+                records.setScheduleId(resultSet.getInt("ScheduleId"));
+                records.setTypeId(resultSet.getInt("TypeId"));
+                records.setConsignmentCode(resultSet.getString("ConsignmentCode"));
+                records.setStateId(resultSet.getInt("StateId"));
+                records.setContainerId(resultSet.getInt("ContainerId"));
+                records.setLocationId(resultSet.getInt("LocationId"));
+                records.setCreatedAt(resultSet.getDate("CreatedAt"));
+                records.setUpdatedAt(resultSet.getDate("UpdatedAt"));
+                records.setClosedAt(resultSet.getDate("ClosedAt"));
+                System.out.print(records);
+                return records;
+            }
+        }, consignmentCode);
+        return Record;
 
+        }
 }
+
+
+
+
