@@ -79,5 +79,18 @@ public class GetController {
     }
 
 
+    @CrossOrigin
+    //@RequestMapping(value = "/allrec", method = RequestMethod.GET)
+    @RequestMapping("/allrec")
+    @ResponseBody
+    public java.lang.String handlerAllRecs() {
+        System.out.print("Get All Recs called.");
+        JSONObject obj = new JSONObject();
+
+        List<record> results = RecordDao.getAllRec();
+        obj.put("results", results);
+        return obj.toString();
+    }
+
 }
 

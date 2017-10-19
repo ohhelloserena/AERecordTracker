@@ -19,10 +19,11 @@ public class record {
     private java.sql.Date updatedAt;
     private java.sql.Date closedAt;
     private String consignmentCode;
+    private String recordStateName;
 
 
 
-    public record(int id, int AttrId, int RecordId, String Value, String title, String number, int scheduleId, int typeId, int stateId, int containerId, int locationId, java.sql.Date createdAt, java.sql.Date updatedAt, java.sql.Date closedAt, String consignmentCode){
+    public record(int id, int AttrId, int RecordId, String Value, String title, String number, int scheduleId, int typeId, int stateId, int containerId, int locationId, java.sql.Date createdAt, java.sql.Date updatedAt, java.sql.Date closedAt, String consignmentCode, String recordStateName){
         this.id= id;
         this.AttrId = AttrId;
         this.RecordId=RecordId;
@@ -38,6 +39,7 @@ public class record {
         this.updatedAt = updatedAt;
         this.closedAt = closedAt;
         this.consignmentCode = consignmentCode;
+        this.recordStateName = recordStateName;
     }
 
     // default constructor
@@ -161,5 +163,9 @@ public class record {
 
     public String getConsignmentCode() {
         return consignmentCode;
+    }
+
+    public void setRecordStateName(String recordStateName) {
+        this.recordStateName = recordStateName;
     }
 }
