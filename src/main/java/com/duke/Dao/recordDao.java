@@ -138,63 +138,6 @@ public class recordDao {
 
         final String sql = "SELECT recordr.records.ConsignmentCode, recordr.records.Number, recordr.records.Title, recordr.recordstates.Name from recordr.records, recordr.recordstates LIMIT 50";
 
-
-        DataSource gce = new DataSource() {
-            @Override
-            public Connection getConnection() throws SQLException {
-                Connection conn = null;
-                Properties connProp = new Properties();
-                connProp.put("user", "avengers");
-                connProp.put("password", "avengers2017");
-                try {
-                    conn = DriverManager.getConnection("jdbc:mysql://35.197.7.124:3306/", connProp);
-                } catch (Exception e) {
-                    System.out.println("Failed to connect to DB.");
-                    return null;
-                }
-                return conn;
-            }
-
-            @Override
-            public Connection getConnection(String username, String password) throws SQLException {
-                return null;
-            }
-
-            @Override
-            public <T> T unwrap(Class<T> iface) throws SQLException {
-                return null;
-            }
-
-            @Override
-            public boolean isWrapperFor(Class<?> iface) throws SQLException {
-                return false;
-            }
-
-            @Override
-            public PrintWriter getLogWriter() throws SQLException {
-                return null;
-            }
-
-            @Override
-            public void setLogWriter(PrintWriter out) throws SQLException {
-
-            }
-
-            @Override
-            public void setLoginTimeout(int seconds) throws SQLException {
-
-            }
-
-            @Override
-            public int getLoginTimeout() throws SQLException {
-                return 0;
-            }
-
-            public Logger getParentLogger() throws SQLFeatureNotSupportedException {
-                return null;
-            }
-        };
-        jdbcTemplate = new JdbcTemplate(gce);
         List<record> recs = jdbcTemplate.query(sql, new RowMapper<record>() {
             public record mapRow(ResultSet resultSet, int Id) throws SQLException {
                 record records = new record();
