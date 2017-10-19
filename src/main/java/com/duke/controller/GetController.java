@@ -58,9 +58,11 @@ public class GetController {
     }
 
     /**
+     * GET request to search by ConsignmentCode
+     *
      * /records/ConsignmentCode
      *
-     * Ex: {consignmentCode: "445810223"}
+     * Input ex: {consignmentCode: "445810223"}
      * @param params
      * @return
      */
@@ -77,6 +79,31 @@ public class GetController {
         obj.put("results", results);
         return obj.toString();
     }
+
+    /**
+     * GET request to search by record number.
+     *
+     * /records/number
+     *
+     * Input ex: {number: "EDM-2003/031"}
+     *
+     * @param params
+     * @return
+     */
+
+    @CrossOrigin
+    @ResponseBody @RequestMapping(value = "/number", method = RequestMethod.GET,consumes= MediaType.APPLICATION_JSON_VALUE)
+    public java.lang.String SearchRecordsByRecordNumber(@RequestBody String params) {
+        System.out.print("this SearchRecordsByRecordNumber respond happened");
+        JSONObject obj = new JSONObject();
+        JSONObject jsonObj = new JSONObject(params);
+        String likeNumber= jsonObj.getString("number");
+
+        List<record> results=RecordDao.SearchRecordsByRecordNumber(likeNumber);
+        obj.put("results", results);
+        return obj.toString();
+    }
+
 
 
     @CrossOrigin

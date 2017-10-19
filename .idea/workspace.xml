@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50232207-8533-40da-802c-8ebd1670e780" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/resources/application.properties" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/avengers.iml" afterPath="$PROJECT_DIR$/avengers.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/duke/Entity/record.java" afterPath="$PROJECT_DIR$/src/main/java/com/duke/Entity/record.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" afterPath="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -40,14 +37,14 @@
     <favorites_list name="ae.the-avengers" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8610121">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="record.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="record.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Entity/record.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="555">
-                  <caret line="37" column="35" lean-forward="true" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
+                <state relative-caret-position="-1473">
+                  <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
                   <folding>
                     <element signature="e#2112#2113#0" expanded="true" />
                     <element signature="e#2146#2147#0" expanded="true" />
@@ -98,11 +95,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="recordDao.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="recordDao.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="357">
-                  <caret line="173" column="42" lean-forward="false" selection-start-line="173" selection-start-column="24" selection-end-line="173" selection-end-column="42" />
+                <state relative-caret-position="1095">
+                  <caret line="116" column="50" lean-forward="true" selection-start-line="116" selection-start-column="50" selection-end-line="116" selection-end-column="50" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#818#1322#0" expanded="true" />
@@ -111,12 +108,15 @@
                     <element signature="e#2711#2712#0" expanded="true" />
                     <element signature="e#3076#4151#0" expanded="true" />
                     <element signature="e#4150#4151#0" expanded="true" />
-                    <element signature="e#6812#7354#0" expanded="true" />
-                    <element signature="e#7353#7354#0" expanded="true" />
-                    <marker date="1508381505000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
-                    <marker date="1508381505000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
-                    <marker date="1508381505000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
-                    <marker date="1508381505000" expanded="true" signature="4808:4972" ph="SELECT recor... records" />
+                    <element signature="e#4505#5580#0" expanded="true" />
+                    <element signature="e#5579#5580#0" expanded="true" />
+                    <element signature="e#8231#8773#0" expanded="true" />
+                    <element signature="e#8772#8773#0" expanded="true" />
+                    <marker date="1508381961000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
+                    <marker date="1508381961000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
+                    <marker date="1508381961000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
+                    <marker date="1508381961000" expanded="true" signature="4410:4448" ph="SELECT * FRO... records" />
+                    <marker date="1508381961000" expanded="true" signature="6227:6391" ph="SELECT recor... records" />
                   </folding>
                 </state>
               </provider>
@@ -126,33 +126,10 @@
             <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="1395">
-                  <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+                  <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="30">
-                  <caret line="2" column="33" lean-forward="false" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/React_Full_Project/src/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
-                  <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-                  <folding>
-                    <marker date="1507954937000" expanded="true" signature="7:166" ph="..." />
-                    <marker date="1507954937000" expanded="true" signature="168:210" ph="//..." />
-                    <marker date="1507954937000" expanded="false" signature="488:658" ph="..." />
+                    <marker date="1508382045000" expanded="true" signature="3086:3473" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -165,8 +142,8 @@
           <file leaf-file-name="GetController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="660">
-                  <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+                <state relative-caret-position="442">
+                  <caret line="102" column="36" lean-forward="true" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -211,9 +188,9 @@
         <option value="$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/4.3.4.RELEASE/spring-jdbc-4.3.4.RELEASE.jar!/org/springframework/jdbc/core/RowMapper.class" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/duke/Entity/record.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" />
       </list>
     </option>
   </component>
@@ -607,12 +584,12 @@
       <updated>1507453762723</updated>
       <workItem from="1507453765386" duration="15129000" />
       <workItem from="1508016636037" duration="275000" />
-      <workItem from="1508212326564" duration="13336000" />
+      <workItem from="1508212326564" duration="13894000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38069000" />
+    <option name="totallyTimeSpent" value="38627000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="822" extended-state="6" />
@@ -705,12 +682,15 @@
             <element signature="e#2711#2712#0" expanded="true" />
             <element signature="e#3076#4151#0" expanded="true" />
             <element signature="e#4150#4151#0" expanded="true" />
-            <element signature="e#6812#7354#0" expanded="true" />
-            <element signature="e#7353#7354#0" expanded="true" />
-            <marker date="1508381505000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
-            <marker date="1508381505000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
-            <marker date="1508381505000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
-            <marker date="1508381505000" expanded="true" signature="4808:4972" ph="SELECT recor... records" />
+            <element signature="e#4505#5580#0" expanded="true" />
+            <element signature="e#5579#5580#0" expanded="true" />
+            <element signature="e#8231#8773#0" expanded="true" />
+            <element signature="e#8772#8773#0" expanded="true" />
+            <marker date="1508381961000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
+            <marker date="1508381961000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="4410:4448" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="6227:6391" ph="SELECT recor... records" />
           </folding>
         </state>
       </provider>
@@ -792,12 +772,15 @@
             <element signature="e#2711#2712#0" expanded="true" />
             <element signature="e#3076#4151#0" expanded="true" />
             <element signature="e#4150#4151#0" expanded="true" />
-            <element signature="e#6812#7354#0" expanded="true" />
-            <element signature="e#7353#7354#0" expanded="true" />
-            <marker date="1508381505000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
-            <marker date="1508381505000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
-            <marker date="1508381505000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
-            <marker date="1508381505000" expanded="true" signature="4808:4972" ph="SELECT recor... records" />
+            <element signature="e#4505#5580#0" expanded="true" />
+            <element signature="e#5579#5580#0" expanded="true" />
+            <element signature="e#8231#8773#0" expanded="true" />
+            <element signature="e#8772#8773#0" expanded="true" />
+            <marker date="1508381961000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
+            <marker date="1508381961000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="4410:4448" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="6227:6391" ph="SELECT recor... records" />
           </folding>
         </state>
       </provider>
@@ -871,12 +854,15 @@
             <element signature="e#2711#2712#0" expanded="true" />
             <element signature="e#3076#4151#0" expanded="true" />
             <element signature="e#4150#4151#0" expanded="true" />
-            <element signature="e#6812#7354#0" expanded="true" />
-            <element signature="e#7353#7354#0" expanded="true" />
-            <marker date="1508381505000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
-            <marker date="1508381505000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
-            <marker date="1508381505000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
-            <marker date="1508381505000" expanded="true" signature="4808:4972" ph="SELECT recor... records" />
+            <element signature="e#4505#5580#0" expanded="true" />
+            <element signature="e#5579#5580#0" expanded="true" />
+            <element signature="e#8231#8773#0" expanded="true" />
+            <element signature="e#8772#8773#0" expanded="true" />
+            <marker date="1508381961000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
+            <marker date="1508381961000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="4410:4448" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="6227:6391" ph="SELECT recor... records" />
           </folding>
         </state>
       </provider>
@@ -1098,42 +1084,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1395">
-          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="173" column="42" lean-forward="false" selection-start-line="173" selection-start-column="24" selection-end-line="173" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#818#1322#0" expanded="true" />
-            <element signature="e#1321#1322#0" expanded="true" />
-            <element signature="e#1637#2712#0" expanded="true" />
-            <element signature="e#2711#2712#0" expanded="true" />
-            <element signature="e#3076#4151#0" expanded="true" />
-            <element signature="e#4150#4151#0" expanded="true" />
-            <element signature="e#6812#7354#0" expanded="true" />
-            <element signature="e#7353#7354#0" expanded="true" />
-            <marker date="1508381505000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
-            <marker date="1508381505000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
-            <marker date="1508381505000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
-            <marker date="1508381505000" expanded="true" signature="4808:4972" ph="SELECT recor... records" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Entity/record.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="35" lean-forward="true" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
+        <state relative-caret-position="-1473">
+          <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
           <folding>
             <element signature="e#2112#2113#0" expanded="true" />
             <element signature="e#2146#2147#0" expanded="true" />
@@ -1179,6 +1133,41 @@
             <element signature="e#3744#3745#0" expanded="true" />
             <element signature="e#3806#3807#0" expanded="true" />
             <element signature="e#3860#3861#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1095">
+          <caret line="116" column="50" lean-forward="true" selection-start-line="116" selection-start-column="50" selection-end-line="116" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#818#1322#0" expanded="true" />
+            <element signature="e#1321#1322#0" expanded="true" />
+            <element signature="e#1637#2712#0" expanded="true" />
+            <element signature="e#2711#2712#0" expanded="true" />
+            <element signature="e#3076#4151#0" expanded="true" />
+            <element signature="e#4150#4151#0" expanded="true" />
+            <element signature="e#4505#5580#0" expanded="true" />
+            <element signature="e#5579#5580#0" expanded="true" />
+            <element signature="e#8231#8773#0" expanded="true" />
+            <element signature="e#8772#8773#0" expanded="true" />
+            <marker date="1508381961000" expanded="true" signature="692:761" ph="SELECT Id,At... customattributevalues" />
+            <marker date="1508381961000" expanded="true" signature="1511:1580" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="2972:3019" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="4410:4448" ph="SELECT * FRO... records" />
+            <marker date="1508381961000" expanded="true" signature="6227:6391" ph="SELECT recor... records" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="102" column="36" lean-forward="true" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

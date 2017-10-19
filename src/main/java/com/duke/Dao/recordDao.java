@@ -96,7 +96,37 @@ public class recordDao {
             }
         }, consignmentCode);
         return Record;
+    }
 
+    /**
+     * Search by Record Number.
+     *
+     * @param number - the record number
+     * @return
+     */
+
+    public List<record> SearchRecordsByRecordNumber(String number) {
+        final String sql = "SELECT * FROM records WHERE Number = ?";
+        List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
+            public record mapRow(ResultSet resultSet, int Id) throws SQLException {
+                record records = new record();
+                records.setId(resultSet.getInt("Id"));
+                records.setNumber(resultSet.getString("Number"));
+                records.setTitle(resultSet.getString("Title"));
+                records.setScheduleId(resultSet.getInt("ScheduleId"));
+                records.setTypeId(resultSet.getInt("TypeId"));
+                records.setConsignmentCode(resultSet.getString("ConsignmentCode"));
+                records.setStateId(resultSet.getInt("StateId"));
+                records.setContainerId(resultSet.getInt("ContainerId"));
+                records.setLocationId(resultSet.getInt("LocationId"));
+                records.setCreatedAt(resultSet.getDate("CreatedAt"));
+                records.setUpdatedAt(resultSet.getDate("UpdatedAt"));
+                records.setClosedAt(resultSet.getDate("ClosedAt"));
+                System.out.print(records);
+                return records;
+            }
+        }, number);
+        return Record;
     }
 
 
