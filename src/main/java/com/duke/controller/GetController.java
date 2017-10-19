@@ -109,7 +109,7 @@ public class GetController {
      *
      * /records/notes?text=text
      *
-     * Input ex: {text: "Molestiae"}
+     * Input ex: {text: "Molestiae cum"}
      *
      * @param text
      * @return
@@ -118,12 +118,8 @@ public class GetController {
     @CrossOrigin
     @ResponseBody @RequestMapping(value = "/notes", method = RequestMethod.GET)
     public java.lang.String SearchRecordsByNotes(@RequestParam(value="text") String text) {
-        JSONObject obj = new JSONObject();
-        System.out.print("GET request to search notes, text is " + text);
-
-        List<record> results=RecordDao.SearchRecordsByNotes(text);
-        obj.put("results", results);
-        return obj.toString();
+        System.out.print("GET request to search notes, text is " + '%' + text + '%');
+        return RecordDao.SearchRecordsByNotes("\'%" + text + "%\'").toString();
     }
 }
 
