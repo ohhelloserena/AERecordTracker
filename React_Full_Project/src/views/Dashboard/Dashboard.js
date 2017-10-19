@@ -34,7 +34,7 @@ request.send();
 console.log("this is th");
 console.log(th);
 
-
+var sampleFilterParam = {"filter":[{"name":"locationId","type":"EQ","value":"5"},{"name":"year","type":"GT","value":"2005"}]};
 
 const response = {recordId: 250, attrId: 4, id: 67, value: "MULTIPLE FIELDS OF PRACTICE - SEE NOTES FIELD"};
 

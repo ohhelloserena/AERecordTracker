@@ -104,20 +104,26 @@ public class GetController {
         return obj.toString();
     }
 
-
+    /**
+     * GET request to search the notes of a record.
+     *
+     * /records/notes?text=text
+     *
+     * Input ex: {text: "Molestiae"}
+     *
+     * @param text
+     * @return
+     */
 
     @CrossOrigin
-    //@RequestMapping(value = "/allrec", method = RequestMethod.GET)
-    @RequestMapping("/allrec")
-    @ResponseBody
-    public java.lang.String handlerAllRecs() {
-        System.out.print("Get All Recs called.");
+    @ResponseBody @RequestMapping(value = "/notes", method = RequestMethod.GET)
+    public java.lang.String SearchRecordsByNotes(@RequestParam(value="text") String text) {
         JSONObject obj = new JSONObject();
+        System.out.print("GET request to search notes, text is " + text);
 
-        List<record> results = RecordDao.getAllRec();
+        List<record> results=RecordDao.SearchRecordsByNotes(text);
         obj.put("results", results);
         return obj.toString();
     }
-
 }
 

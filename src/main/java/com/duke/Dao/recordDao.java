@@ -63,7 +63,7 @@ public class recordDao {
                 System.out.print(records);
                 return records;
             }
-        }, title, Number);
+        }, likeExpression, Number);
         return Record;
     }
 
@@ -104,7 +104,6 @@ public class recordDao {
      * @param number - the record number
      * @return
      */
-
     public List<record> SearchRecordsByRecordNumber(String number) {
         final String sql = "SELECT * FROM records WHERE Number = ?";
         List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
@@ -129,28 +128,34 @@ public class recordDao {
         return Record;
     }
 
-
-    //TESTING ONLY
-    //Misnomer: returns first 50 records in recordstate
-    //How to use: visit localhost:8080/records/allrecs. You get a JSON on your browser
-    public List<record> getAllRec() {
-        //final String sql = "SELECT recordr.records.ConsignmentCode, recordr.records.Number, recordr.records.Title, recordr.recordstates.Name, recordr.records.CreatedAt, recordr.records.UpdatedAt, recordr.records.ClosedAt  FROM recordr.records, recordr.recordstates WHERE recordr.records.StateId = recordr.recordstates.Id AND recordr.records.ConsignmentCode = "580531982";";
-
-        final String sql = "SELECT recordr.records.ConsignmentCode, recordr.records.Number, recordr.records.Title, recordr.recordstates.Name from recordr.records, recordr.recordstates LIMIT 50";
-
-        List<record> recs = jdbcTemplate.query(sql, new RowMapper<record>() {
-            public record mapRow(ResultSet resultSet, int Id) throws SQLException {
-                record records = new record();
-                records.setConsignmentCode(resultSet.getString("ConsignmentCode"));
-                records.setNumber(resultSet.getString("Number"));
-                records.setTitle(resultSet.getString("Title"));
-                records.setRecordStateName(resultSet.getString("Name"));
-                System.out.print(records);
-                return records;
-            }
-        });
-        return recs;
-
+        /**
+         * Full text search on notes.
+         *
+         * @param text - the text search
+         * @return
+         */
+        public List<record> SearchRecordsByNotes(String text) {
+            final String sql = "select records.*, notes.Chunk, notes.Text from notes INNER JOIN records ON notes.RowId=records.Id where notes.TableId = 26 AND notes.Text like ?";
+            List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
+                public record mapRow(ResultSet resultSet, int Id) throws SQLException {
+                    record records = new record();
+                    records.setId(resultSet.getInt("Id"));
+                    records.setNumber(resultSet.getString("Number"));
+                    records.setTitle(resultSet.getString("Title"));
+                    records.setScheduleId(resultSet.getInt("ScheduleId"));
+                    records.setTypeId(resultSet.getInt("TypeId"));
+                    records.setConsignmentCode(resultSet.getString("ConsignmentCode"));
+                    records.setStateId(resultSet.getInt("StateId"));
+                    records.setContainerId(resultSet.getInt("ContainerId"));
+                    records.setLocationId(resultSet.getInt("LocationId"));
+                    records.setCreatedAt(resultSet.getDate("CreatedAt"));
+                    records.setUpdatedAt(resultSet.getDate("UpdatedAt"));
+                    records.setClosedAt(resultSet.getDate("ClosedAt"));
+                    System.out.print(records);
+                    return records;
+                }
+            }, '%'+text+'%');
+            return Record;
     }
 }
 
