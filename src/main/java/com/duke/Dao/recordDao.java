@@ -28,6 +28,7 @@ public class recordDao {
 
 
     public List<record> getRecordById() {
+        System.out.println("In recordDao...In getRecordById()");
         final String sql = "SELECT Id,AttrId,RecordId,Value  FROM customattributevalues LIMIT 0,5";
         List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
             public record mapRow(ResultSet resultSet, int Id) throws SQLException {

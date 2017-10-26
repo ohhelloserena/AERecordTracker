@@ -19,6 +19,7 @@ var th;
 var request = new XMLHttpRequest();
 request.open('GET', 'http://127.0.0.1:8080/records/', false);
 
+
 request.onload = function() {
     if (this.status >= 200 && this.status < 400) {
         var data = JSON.parse(this.response);

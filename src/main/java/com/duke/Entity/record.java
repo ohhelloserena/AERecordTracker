@@ -19,7 +19,7 @@ public class record {
     private java.sql.Date updatedAt;
     private java.sql.Date closedAt;
     private String consignmentCode;
-    private String recordStateName;
+    //private String recordStateName;
 
 
 
@@ -39,7 +39,7 @@ public class record {
         this.updatedAt = updatedAt;
         this.closedAt = closedAt;
         this.consignmentCode = consignmentCode;
-        this.recordStateName = recordStateName;
+        //this.recordStateName = recordStateName;
     }
 
     // default constructor
@@ -81,91 +81,115 @@ public class record {
         this.number = number;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
-    }
-
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
-    }
-
-    public void setStateId(int stateId) {
-        this.stateId = stateId;
-    }
-
-    public void setContainerId(int containerId) {
-        this.containerId = containerId;
-    }
-
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
-
-    public void setCreatedAt(java.sql.Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(java.sql.Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public void setClosedAt(java.sql.Date closedAt) {
-        this.closedAt = closedAt;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getNumber() {
-        return number;
+
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
+    /*
     public int getScheduleId() {
         return scheduleId;
     }
+    */
 
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
+    /*
     public int getTypeId() {
         return typeId;
     }
+    */
 
+    public void setStateId(int stateId) {
+        this.stateId = stateId;
+    }
+
+    /*
     public int getStateId() {
         return stateId;
     }
+    */
 
+    public void setContainerId(int containerId) {
+        this.containerId = containerId;
+    }
+
+    /*
     public int getContainerId() {
         return containerId;
     }
+    */
 
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    /*
     public int getLocationId() {
         return locationId;
     }
+    */
 
+    public void setCreatedAt(java.sql.Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    /*
     public java.sql.Date getCreatedAt() {
         return createdAt;
     }
+    */
 
+    public void setUpdatedAt(java.sql.Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    /*
     public java.sql.Date getUpdatedAt() {
         return updatedAt;
     }
+    */
 
+    public void setClosedAt(java.sql.Date closedAt) {
+        this.closedAt = closedAt;
+    }
+
+    /*
     public java.sql.Date getClosedAt() {
         return closedAt;
     }
+    */
 
     public void setConsignmentCode(String consignmentCode) {
         this.consignmentCode = consignmentCode;
     }
 
+    /*
     public String getConsignmentCode() {
         return consignmentCode;
     }
+    */
 
+
+
+    /*
     public void setRecordStateName(String recordStateName) {
         this.recordStateName = recordStateName;
     }
+    */
 }
