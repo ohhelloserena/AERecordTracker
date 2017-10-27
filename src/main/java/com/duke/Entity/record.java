@@ -15,15 +15,16 @@ public class record {
     private int stateId;
     private int containerId;
     private int locationId;
-    private java.sql.Date createdAt;
-    private java.sql.Date updatedAt;
-    private java.sql.Date closedAt;
+    private java.sql.Timestamp createdAt;
+    private java.sql.Timestamp updatedAt;
+    private java.sql.Timestamp closedAt;
     private String consignmentCode;
-    //private String recordStateName;
+    private String recordStateName;
+    private Boolean hasPrintedLabel;
+    private Boolean hasPrintedEndTabLabel;
 
 
-
-    public record(int id, int AttrId, int RecordId, String Value, String title, String number, int scheduleId, int typeId, int stateId, int containerId, int locationId, java.sql.Date createdAt, java.sql.Date updatedAt, java.sql.Date closedAt, String consignmentCode, String recordStateName){
+    public record(int id, int AttrId, int RecordId, String Value, String title, String number, int scheduleId, int typeId, int stateId, int containerId, int locationId, java.sql.Timestamp createdAt, java.sql.Timestamp updatedAt, java.sql.Timestamp closedAt, String consignmentCode, String recordStateName){
         this.id= id;
         this.AttrId = AttrId;
         this.RecordId=RecordId;
@@ -39,7 +40,9 @@ public class record {
         this.updatedAt = updatedAt;
         this.closedAt = closedAt;
         this.consignmentCode = consignmentCode;
-        //this.recordStateName = recordStateName;
+        this.recordStateName = recordStateName;
+        this.hasPrintedLabel = false;
+        this.hasPrintedEndTabLabel = false;
     }
 
     // default constructor
@@ -81,115 +84,99 @@ public class record {
         this.number = number;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
+    public void setStateId(int stateId) {
+        this.stateId = stateId;
+    }
+
+    public void setContainerId(int containerId) {
+        this.containerId = containerId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public void setCreatedAt(java.sql.Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(java.sql.Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setClosedAt(java.sql.Timestamp closedAt) {
+        this.closedAt = closedAt;
     }
 
     public String getTitle() {
         return title;
     }
 
-
-
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
+    public String getNumber() {
+        return number;
     }
 
-    /*
     public int getScheduleId() {
         return scheduleId;
     }
-    */
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
-    }
-
-    /*
     public int getTypeId() {
         return typeId;
     }
-    */
 
-    public void setStateId(int stateId) {
-        this.stateId = stateId;
-    }
-
-    /*
     public int getStateId() {
         return stateId;
     }
-    */
 
-    public void setContainerId(int containerId) {
-        this.containerId = containerId;
-    }
-
-    /*
     public int getContainerId() {
         return containerId;
     }
-    */
 
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
-
-    /*
     public int getLocationId() {
         return locationId;
     }
-    */
 
-    public void setCreatedAt(java.sql.Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    /*
-    public java.sql.Date getCreatedAt() {
+    public java.sql.Timestamp getCreatedAt() {
         return createdAt;
     }
-    */
 
-    public void setUpdatedAt(java.sql.Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    /*
-    public java.sql.Date getUpdatedAt() {
+    public java.sql.Timestamp getUpdatedAt() {
         return updatedAt;
     }
-    */
 
-    public void setClosedAt(java.sql.Date closedAt) {
-        this.closedAt = closedAt;
-    }
-
-    /*
-    public java.sql.Date getClosedAt() {
+    public java.sql.Timestamp getClosedAt() {
         return closedAt;
     }
-    */
 
     public void setConsignmentCode(String consignmentCode) {
         this.consignmentCode = consignmentCode;
     }
 
-    /*
     public String getConsignmentCode() {
         return consignmentCode;
     }
-    */
 
-
-
-    /*
     public void setRecordStateName(String recordStateName) {
         this.recordStateName = recordStateName;
     }
-    */
+
+    public Boolean getHasPrintedLabel() { return hasPrintedLabel; }
+
+    public void setHasPrintedLabel(Boolean hasPrinted) { this.hasPrintedLabel = hasPrintedLabel; }
+
+    public Boolean getHasPrintedEndTabLabel() { return hasPrintedEndTabLabel; }
+
+    public void setHasPrintedEndTabLabel(Boolean hasPrintedEndTabLabel) { this.hasPrintedEndTabLabel = hasPrintedEndTabLabel; }
 }

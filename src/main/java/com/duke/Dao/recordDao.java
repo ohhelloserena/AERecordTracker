@@ -28,7 +28,6 @@ public class recordDao {
 
 
     public List<record> getRecordById() {
-        System.out.println("In recordDao...In getRecordById()");
         final String sql = "SELECT Id,AttrId,RecordId,Value  FROM customattributevalues LIMIT 0,5";
         List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
             public record mapRow(ResultSet resultSet, int Id) throws SQLException {
@@ -60,9 +59,12 @@ public class recordDao {
                 records.setStateId(resultSet.getInt("StateId"));
                 records.setContainerId(resultSet.getInt("ContainerId"));
                 records.setLocationId(resultSet.getInt("LocationId"));
-                records.setCreatedAt(resultSet.getDate("CreatedAt"));
-                records.setUpdatedAt(resultSet.getDate("UpdatedAt"));
-                records.setClosedAt(resultSet.getDate("ClosedAt"));
+                java.util.Date createdDate = resultSet.getDate("CreatedAt");
+                java.util.Date updatedDate = resultSet.getDate("UpdatedAt");
+                java.util.Date closedDate = resultSet.getDate("ClosedAt");
+                records.setCreatedAt(new java.sql.Timestamp(createdDate.getTime()));
+                records.setUpdatedAt(new java.sql.Timestamp(updatedDate.getTime()));
+                records.setClosedAt(new java.sql.Timestamp(closedDate.getTime()));
                 System.out.print(records);
                 return records;
             }
@@ -91,9 +93,12 @@ public class recordDao {
                 records.setStateId(resultSet.getInt("StateId"));
                 records.setContainerId(resultSet.getInt("ContainerId"));
                 records.setLocationId(resultSet.getInt("LocationId"));
-                records.setCreatedAt(resultSet.getDate("CreatedAt"));
-                records.setUpdatedAt(resultSet.getDate("UpdatedAt"));
-                records.setClosedAt(resultSet.getDate("ClosedAt"));
+                java.util.Date createdDate = resultSet.getDate("CreatedAt");
+                java.util.Date updatedDate = resultSet.getDate("UpdatedAt");
+                java.util.Date closedDate = resultSet.getDate("ClosedAt");
+                records.setCreatedAt(new java.sql.Timestamp(createdDate.getTime()));
+                records.setUpdatedAt(new java.sql.Timestamp(updatedDate.getTime()));
+                records.setClosedAt(new java.sql.Timestamp(closedDate.getTime()));
                 System.out.print(records);
                 return records;
             }
@@ -121,9 +126,12 @@ public class recordDao {
                 records.setStateId(resultSet.getInt("StateId"));
                 records.setContainerId(resultSet.getInt("ContainerId"));
                 records.setLocationId(resultSet.getInt("LocationId"));
-                records.setCreatedAt(resultSet.getDate("CreatedAt"));
-                records.setUpdatedAt(resultSet.getDate("UpdatedAt"));
-                records.setClosedAt(resultSet.getDate("ClosedAt"));
+                java.util.Date createdDate = resultSet.getDate("CreatedAt");
+                java.util.Date updatedDate = resultSet.getDate("UpdatedAt");
+                java.util.Date closedDate = resultSet.getDate("ClosedAt");
+                records.setCreatedAt(new java.sql.Timestamp(createdDate.getTime()));
+                records.setUpdatedAt(new java.sql.Timestamp(updatedDate.getTime()));
+                records.setClosedAt(new java.sql.Timestamp(closedDate.getTime()));
                 System.out.print(records);
                 return records;
             }
@@ -131,59 +139,58 @@ public class recordDao {
         return Record;
     }
 
-        /**
-         * Full text search on notes.
-         * Joins records and notes, then selects those whose notes.text contains text
-         * TODO: combine chunks
-         * TODO: implement a rowmapper that is not ugly (potentially portable to other functions in this file)
-         *
-         * @param text - the text search
-         * @return
-         */
-        public JSONObject SearchRecordsByNotes(String text) {
-            return jdbcTemplate.query("select records.*, notes.Chunk, notes.Text from notes INNER JOIN records ON notes.RowId=records.Id where notes.TableId = 26 AND notes.Text LIKE " + text, new ResultSetExtractor<JSONObject>() {
-                @Override
-                public JSONObject extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                    List<noteSearch> arr = new ArrayList<noteSearch>();
-                    int lastid = -1;
-                    int lastChunk = -2;
-                    int index = 0;
-                    while(resultSet.next())
+    /**
+     * Full text search on notes.
+     * Joins records and notes, then selects those whose notes.text contains text
+     * TODO: combine chunks
+     * TODO: implement a rowmapper that is not ugly (potentially portable to other functions in this file)
+     *
+     * @param text - the text search
+     * @return
+     */
+    public JSONObject SearchRecordsByNotes(String text) {
+        return jdbcTemplate.query("select records.*, notes.Chunk, notes.Text from notes INNER JOIN records ON notes.RowId=records.Id where notes.TableId = 26 AND notes.Text LIKE " + text, new ResultSetExtractor<JSONObject>() {
+            @Override
+            public JSONObject extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<noteSearch> arr = new ArrayList<noteSearch>();
+                int lastid = -1;
+                int lastChunk = -2;
+                int index = 0;
+                while(resultSet.next())
+                {
+                    if(resultSet.getInt("Id") == lastid && lastChunk + 1 == resultSet.getInt("Chunk"))
                     {
-                        if(resultSet.getInt("Id") == lastid && lastChunk + 1 == resultSet.getInt("Chunk"))
-                        {
-                            //Additional pieces of the same note
-                            noteSearch old = arr.get(index);
-                            old.Text = old.Text.concat(resultSet.getString("Text"));
-                            arr.set(index, old);
-                            lastChunk++;
-                            index++;
-                            continue;
-                        }
-                        lastChunk = 0;
-                        noteSearch note = new noteSearch();
-                        note.Id = resultSet.getInt("Id");
-                        lastid = note.Id;
-                        note.Number = resultSet.getString("Number");
-                        note.Title = resultSet.getString("Title");
-                        note.ScheduleId = resultSet.getInt("ScheduleId");
-                        note.TypeId = resultSet.getInt("TypeId");
-                        note.ConsignmentCode = resultSet.getString("ConsignmentCode");
-                        note.StateId = resultSet.getInt("StateId");
-                        note.ContainerId = resultSet.getInt("ContainerId");
-                        note.LocationId = resultSet.getInt("LocationId");
-                        note.CreatedAt = resultSet.getDate("CreatedAt");
-                        note.UpdatedAt = resultSet.getDate("UpdatedAt");
-                        note.ClosedAt = resultSet.getDate("ClosedAt");
-                        note.Text = resultSet.getString("Text");
-                        arr.add(note);
+                        //Additional pieces of the same note
+                        noteSearch old = arr.get(index);
+                        old.Text = old.Text.concat(resultSet.getString("Text"));
+                        arr.set(index, old);
+                        lastChunk++;
                         index++;
+                        continue;
                     }
-                    JSONObject out = new JSONObject();
-                    out.put("results", arr);
-                    return out;
+                    lastChunk = 0;
+                    noteSearch note = new noteSearch();
+                    note.Id = resultSet.getInt("Id");
+                    lastid = note.Id;
+                    note.Number = resultSet.getString("Number");
+                    note.Title = resultSet.getString("Title");
+                    note.ScheduleId = resultSet.getInt("ScheduleId");
+                    note.TypeId = resultSet.getInt("TypeId");
+                    note.ConsignmentCode = resultSet.getString("ConsignmentCode");
+                    note.StateId = resultSet.getInt("StateId");
+                    note.ContainerId = resultSet.getInt("ContainerId");
+                    note.LocationId = resultSet.getInt("LocationId");
+                    note.CreatedAt = resultSet.getDate("CreatedAt");
+                    note.UpdatedAt = resultSet.getDate("UpdatedAt");
+                    note.ClosedAt = resultSet.getDate("ClosedAt");
+                    note.Text = resultSet.getString("Text");
+                    arr.add(note);
+                    index++;
                 }
-            });
+                JSONObject out = new JSONObject();
+                out.put("results", arr);
+                return out;
+            }
+        });
     }
 }
-
