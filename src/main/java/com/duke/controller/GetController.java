@@ -154,11 +154,11 @@ public class GetController {
     }
 
     /**
-     * GET request to search by ConsignmentCode
+     * POST request to search by ConsignmentCode
      *
      * /records/ConsignmentCode
      *
-     * Input ex: {consignmentCode: "445810223"}
+     * Input ex: {"consignmentCode": "445810223"}
      * @param params
      * @return
      */
@@ -177,18 +177,18 @@ public class GetController {
     }
 
     /**
-     * GET request to search by record number.
+     * POST request to search by record number.
      *
      * /records/number
      *
-     * Input ex: {number: "EDM-2003/031"}
+     * Input ex: {"number": "EDM-2003/031"}
      *
      * @param params
      * @return
      */
 
     @CrossOrigin
-    @ResponseBody @RequestMapping(value = "/number", method = RequestMethod.GET,consumes= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody @RequestMapping(value = "/number", method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE)
     public java.lang.String SearchRecordsByRecordNumber(@RequestBody String params) {
         System.out.print("this SearchRecordsByRecordNumber respond happened");
         JSONObject obj = new JSONObject();
