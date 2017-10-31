@@ -61,34 +61,6 @@ var sampleFilterParam = {"filter":[{"name":"locationId","type":"EQ","value":"5"}
 
 
 
-
-//  PRINTING-----------------------------------------------------------------------------------
-
-
-function onPrint(props) {
-
-    var pdfConverter = require('jspdf');
-
-    var doc = new pdfConverter('p','mm','letter');
-
-    doc.setFontSize(22);
-    doc.text(20, 50, 'Park Entry Ticket');
-    doc.setFontSize(16);
-    doc.save("test.pdf");
-}
-
-
-
-
-
-
-
-
-//  -------------------------------------------------------------------------------------------
-
-
-
-
 class BoxRow extends React.Component {
     render() {
         const box = this.props.box;
@@ -116,11 +88,12 @@ class RecordRow extends React.Component {
 
     printRecordLabel() {
         this.togglePrintOptions();
-        this.pQueue.test();
+        this.props.addToRecordLabels(this.props.record)         // Full.addToRecordLabels()
     }
 
     printEndTabLabel() {
         this.togglePrintOptions();
+        this.props.addToEndTabLabels(this.props.record)         // Full.addToEndTabLabels()
     }
 
     togglePrintOptions() {
@@ -131,7 +104,6 @@ class RecordRow extends React.Component {
 
     render() {
         const record = this.props.record;
-
         return (
             <tr>
                 <th>RECORD {record.id}
@@ -141,10 +113,10 @@ class RecordRow extends React.Component {
                         </DropdownToggle>
                         <DropdownMenu right className={this.state.showPrintOptions ? 'show' : ''}>
                             <DropdownItem>
-                                <button onClick={this.printRecordLabel}>+ Record Label</button>
+                                <div onClick={this.printRecordLabel}>+ Record Label</div>
                             </DropdownItem>
                             <DropdownItem>
-                                <button onClick={this.printEndTabLabel}>+ End Tab Label</button>
+                                <div onClick={this.printEndTabLabel}>+ End Tab Label</div>
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
@@ -169,14 +141,20 @@ class ResultsTable extends React.Component {
                 rows.push(
                     <RecordRow
                         record={result}
-                        key={result.id} />
+                        key={result.id}
+                        addToRecordLabels={this.props.addToRecordLabels}
+                        addToEndTabLabels={this.props.addToEndTabLabels}
+                    />
                 );
             }
             else {                                  // Create BoxRow
                 rows.push(
                     <BoxRow
                         box={result}
-                        key={result.id} />
+                        key={result.id}
+                        addToContainerReports={this.props.addToContainerReports}
+                        addToEnclosureReports={this.props.addToEnclosureReports}
+                    />
                 );
             }
         });
@@ -246,18 +224,25 @@ class SearchBar extends React.Component {
 
 
 
-class App extends React.Component {
+class Dashboard extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
 
 
     render() {
         return (
             <div>
-                <SearchBar />
-                <ResultsTable results={th} />
+                <div>
+
+                    <SearchBar />
+                    <ResultsTable results={th} addToRecordLabels={this.props.addToRecordLabels} addToEndTabLabels={this.props.addToEndTabLabels} addToContainerReports={this.props.addToContainerReports} addToEnclosureReports={this.props.addToEnclosureReports}/>
+                </div>
             </div>
         );
     }
 }
 
 
-export default App;
+export default Dashboard;
