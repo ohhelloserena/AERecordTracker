@@ -46,7 +46,10 @@ public class record {
     }
 
     // default constructor
-    public record(){};
+    public record(){
+        this.hasPrintedLabel = false;
+        this.hasPrintedEndTabLabel = false;
+    };
 
     public Integer getId() {
         return id;

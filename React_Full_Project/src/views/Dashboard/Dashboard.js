@@ -28,8 +28,62 @@ import {
     DropdownItem
 } from "reactstrap";
 
+function getDate(input)
+{ //converts the JSON's string date into an array of ints, [year, month, day]
+	return input.split("-", 3).map(function(x){
+		return parseInt(x);
+	});
+}
+
+function callFilter(row, index, arr)
+{
+	for (let criterion of this)
+	{
+		if (['typeId', 'locationId', 'stateId', 'classId'].indexOf(criterion.column) !== -1)
+		{
+			//EQ means only include those with value,
+			//otherwise means exclude those with value
+			if (criterion.type === "EQ")
+			{
+				if (criterion.value.indexOf(row[criterion.column]) === -1) return false;
+			}
+			else if (criterion.value.indexOf(row[criterion.column]) !== -1) return false;
+		}
+		else if (['updatedAt', 'createdAt', 'closedAt'].indexOf(criterion.column) !== -1)
+		{
+			let date = getDate(row[criterion.column]);
+			switch (criterion.type)
+			{
+				case 'GT': //after this date
+					if (date[0] < criterion.value[0] || date[1] < criterion.value[1] || date[2] < criterion.value[2]) return false;
+					break;
+				case 'EQ': //at this date (probably more like year)
+					if (date[0] !== criterion.value[0] || date[1] !== criterion.value[1] || date[2] !== criterion.value[2]) return false;
+					break;
+				case 'LT': //after this date
+					if (date[0] > criterion.value[0] || date[1] > criterion.value[1] || date[2] > criterion.value[2]) return false;
+					break;
+				default: //invalid comparator
+					throw "filter::invalid comparator " + criterion.type;
+			}
+		}
+	}
+	return true;
+}
 
 
+//filterJSON takes two parameters
+//input is an array of records
+//criteria is an array of criterions
+//each criterion has at least 3 elements
+//column indicates which record column it operates on
+//type is the comparator to use. GT, EQ, LT
+//value is the value to compare to
+function filterJSON(input, crit)
+{
+    if(input === null || input === undefined) return null;
+	return input.filter(callFilter, crit);
+}
 
 var th;
 var request = new XMLHttpRequest();
@@ -37,10 +91,15 @@ var request = new XMLHttpRequest();
 request.open('POST', 'http://127.0.0.1:8080/records/consignmentCode', false);
 request.setRequestHeader("Content-type", "application/json");
 
+//TODO: shouldn't get records on page load, it should be after user performs query
 request.onload = function() {
+    //TODO:Front-end must create UI for filters, parse filters to a JSON to pass to filter
+	let comp = [{"column":"createdAt","type":"LT","value":[2009, 12, 31]}, {"column":"createdAt","type":"GT","value":[2005, 1, 1]}];
     if (this.status >= 200 && this.status < 400) {
         var data = JSON.parse(this.response);
-        th = data.results;
+        //th = data.results;
+        //sample of how filtering would be done
+        th = filterJSON(data.results, comp);
     } else {
         console.error('Response received and there was an error');
     }
@@ -57,34 +116,6 @@ console.log(th);
 
 
 var sampleFilterParam = {"filter":[{"name":"locationId","type":"EQ","value":"5"},{"name":"year","type":"GT","value":"2005"}]};
-
-
-
-
-
-//  PRINTING-----------------------------------------------------------------------------------
-
-
-function onPrint(props) {
-
-    var pdfConverter = require('jspdf');
-
-    var doc = new pdfConverter('p','mm','letter');
-
-    doc.setFontSize(22);
-    doc.text(20, 50, 'Park Entry Ticket');
-    doc.setFontSize(16);
-    doc.save("test.pdf");
-}
-
-
-
-
-
-
-
-
-//  -------------------------------------------------------------------------------------------
 
 
 
@@ -116,11 +147,11 @@ class RecordRow extends React.Component {
 
     printRecordLabel() {
         this.togglePrintOptions();
-        this.pQueue.test();
+        this.props.addToRecordLabels(this.props.record)         // Full.addToRecordLabels()
     }
 
     printEndTabLabel() {
-        this.togglePrintOptions();
+        this.props.addToEndTabLabels(this.props.record)         // Full.addToEndTabLabels()
     }
 
     togglePrintOptions() {
@@ -141,10 +172,10 @@ class RecordRow extends React.Component {
                         </DropdownToggle>
                         <DropdownMenu right className={this.state.showPrintOptions ? 'show' : ''}>
                             <DropdownItem>
-                                <button onClick={this.printRecordLabel}>+ Record Label</button>
+                                <div onClick={this.printRecordLabel}>+ Record Label</div>
                             </DropdownItem>
                             <DropdownItem>
-                                <button onClick={this.printEndTabLabel}>+ End Tab Label</button>
+                                <div onClick={this.printEndTabLabel}>+ End Tab Label</div>
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
@@ -158,7 +189,10 @@ class RecordRow extends React.Component {
     }
 }
 
-
+//TODO: actual dynamic table
+//this means a table that accepts arbitrary number of columns
+//will need array of columns or something
+//(maybe user don't want to see this column but wants to see that)
 class ResultsTable extends React.Component {
     render() {
         const rows = [];
@@ -169,14 +203,20 @@ class ResultsTable extends React.Component {
                 rows.push(
                     <RecordRow
                         record={result}
-                        key={result.id} />
+                        key={result.id}
+                        addToRecordLabels={this.props.addToRecordLabels}
+                        addToEndTabLabels={this.props.addToEndTabLabels}
+                    />
                 );
             }
             else {                                  // Create BoxRow
                 rows.push(
                     <BoxRow
                         box={result}
-                        key={result.id} />
+                        key={result.id}
+                        addToContainerReports={this.props.addToContainerReports}
+                        addToEnclosureReports={this.props.addToEnclosureReports}
+                    />
                 );
             }
         });
@@ -246,18 +286,25 @@ class SearchBar extends React.Component {
 
 
 
-class App extends React.Component {
+class Dashboard extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
 
 
     render() {
         return (
             <div>
-                <SearchBar />
-                <ResultsTable results={th} />
+                <div>
+
+                    <SearchBar />
+                    <ResultsTable results={th} addToRecordLabels={this.props.addToRecordLabels} addToEndTabLabels={this.props.addToEndTabLabels} addToContainerReports={this.props.addToContainerReports} addToEnclosureReports={this.props.addToEnclosureReports}/>
+                </div>
             </div>
         );
     }
 }
 
 
-export default App;
+export default Dashboard;
