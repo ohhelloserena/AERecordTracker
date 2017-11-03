@@ -1,5 +1,6 @@
 package com.duke.Dao;
 
+import com.duke.Entity.Locations;
 import com.duke.Entity.noteSearch;
 import com.duke.Entity.record;
 import org.json.JSONObject;
@@ -10,6 +11,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.stream.Location;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -193,4 +195,38 @@ public class recordDao {
             }
         });
     }
+
+    /**
+     * Returns the location name of a record given record's Id.
+     *
+     * Inner join on locations and records tables.
+     *
+     * @param RecordId from record table
+     * @return
+     */
+
+
+    public List<Locations> GetRecordLocationForRecord(String RecordId) {
+        final String sql = "SELECT locations.Name FROM locations INNER JOIN records on locations.Id = records.LocationId WHERE records.id = ?";
+
+        final List<Locations> locationsList = jdbcTemplate.query(sql, new ResultSetExtractor<List<Locations>>() {
+
+            @Override
+            public List<Locations> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<Locations> list = new ArrayList<Locations>();
+
+                while (resultSet.next()) {
+                    Locations l = new Locations();
+                    l.setName(resultSet.getString("locations.Name"));
+                    list.add(l);
+                }
+
+                System.out.println(list);
+                return list;
+            }
+        }, RecordId);
+        return locationsList;
+    }
+
+
 }
