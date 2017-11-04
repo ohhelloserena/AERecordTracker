@@ -25,8 +25,10 @@ import {
     Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
+    TabContent, TabPane, Nav, NavItem, NavLink, CardTitle, CardText,
 } from "reactstrap";
+import classnames from 'classnames';
 
 function getDate(input)
 { //converts the JSON's string date into an array of ints, [year, month, day]
@@ -87,7 +89,7 @@ function filterJSON(input, crit)
 
 var th;
 var request = new XMLHttpRequest();
-
+/* TODO: Uncomment this later
 request.open('POST', 'http://127.0.0.1:8080/records/consignmentCode', false);
 request.setRequestHeader("Content-type", "application/json");
 
@@ -110,7 +112,7 @@ request.onerror = function() {
 
 var body = JSON.stringify({"consignmentCode": "DESTRUCTION CERTIFICATE 2009-01"});
 request.send(body);
-
+*/
 console.log("this is th");
 console.log(th);
 
@@ -119,7 +121,8 @@ var sampleFilterParam = {"filter":[{"name":"locationId","type":"EQ","value":"5"}
 
 
 
-
+//TODO: Uncomment this later (BoxRow, RecordRow, ResultsTable)
+/*
 class BoxRow extends React.Component {
     render() {
         const box = this.props.box;
@@ -193,6 +196,7 @@ class RecordRow extends React.Component {
 //this means a table that accepts arbitrary number of columns
 //will need array of columns or something
 //(maybe user don't want to see this column but wants to see that)
+
 class ResultsTable extends React.Component {
     render() {
         const rows = [];
@@ -260,37 +264,280 @@ class ResultsTable extends React.Component {
         );
     }
 }
+*/
 
 
 
 class SearchBar extends React.Component {
+    //TODO: PAUL'S CODE
+
+
+     constructor(props) {
+      super(props);
+      this.state = {
+        Number: 0,
+        title: 0,
+        statesName: '',
+        consignmentCode: '',
+
+        typeId: '',
+        location: '',
+        classification: '',
+        stateId: '',
+        retentionSchedules: '',
+
+
+        numberOrConsignmentCode: '',
+
+        activeTab: '1',
+
+        dropdownOpen: false,
+
+        dropdownValue: "Please select quick search attribute:"
+      };
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmitQuickSearch = this.handleSubmitQuickSearch.bind(this);
+      this.handleSubmitFullTextSearch = this.handleSubmitFullTextSearch.bind(this);
+      this.toggleTab = this.toggleTab.bind(this);
+      this.toggleAttr = this.toggleAttr.bind(this);
+      this.changeValue = this.changeValue.bind(this);
+    }
+
+
+    handleSubmitQuickSearch(event) {
+        if (this.state.dropdownValue == "Please select quick search attribute:"){
+            console.log(JSON.stringify({Error:'No quick search attribute is selected from the dropdown menu'}))
+        };
+        if (this.state.dropdownValue == "Record/Box Number:"){
+            console.log(JSON.stringify({Number:this.state.numberOrConsignmentCode}))
+            //TODO: Something to catch invalid Record/Box Number
+        };
+        if (this.state.dropdownValue == "Consignment Code:"){
+            console.log(JSON.stringify({consignmentCode:this.state.numberOrConsignmentCode}))
+            //TODO: Something to catch invalid Consignmnet Code
+        };
+        event.preventDefault();
+    }
+
+    handleSubmitFullTextSearch(event) {
+        console.log('A bunch of record queries are submitted: ' +
+        JSON.stringify(
+            {
+            Number:this.state.Number,
+            title:this.state.title,
+            statesName:this.state.statesName,
+            consignmentCode:this.state.consignmentCode
+            }
+           )
+         );
+        event.preventDefault();
+    }
+
+    handleChange(event) {
+      const name = event.target.name;
+      this.setState({
+        [name]: event.target.value
+      });
+      //console.log(this.state);
+    }
+
+      toggleTab(tab) {
+        if (this.state.activeTab !== tab) {
+          this.setState({
+            activeTab: tab
+          });
+        }
+      }
+
+      toggleAttr() {
+        this.setState({
+          dropdownOpen: !this.state.dropdownOpen
+        });
+      }
+
+      changeValue(e) {
+        this.setState({dropdownValue: e.currentTarget.textContent})
+      }
+
     render() {
         return (
-            <Form >
-                <FormGroup row>
-                    <h3><b>Search</b></h3>
-                    <h5> </h5>
-                </FormGroup>
-                <FormGroup row>
-                    <Col sm={10}>
-                        <Input type="text" name="Number" placeholder="Search..."/>
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Button type="submit" id="submit-button" size="sm" color="secondary" value="submit">Search</Button>
-                </FormGroup>
-            </Form>
+      <div>
+        <Nav tabs>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === '1' })}
+              onClick={() => { this.toggleTab('1'); }}
+            >
+              Quick Search
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === '2' })}
+              onClick={() => { this.toggleTab('2'); }}
+            >
+              Full Text Search
+            </NavLink>
+          </NavItem>
+        </Nav>
+        <TabContent activeTab={this.state.activeTab}>
+          <TabPane tabId="1">
+            <Row>
+              <Col sm="20">
+                <div className="animated fadeIn">
+                    <Form onSubmit={this.handleSubmitQuickSearch}>
+
+                          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleAttr} sm={2}>
+                            <DropdownToggle caret>
+                              {this.state.dropdownValue}
+                            </DropdownToggle>
+                            <DropdownMenu>
+                              <DropdownItem>
+                                <div onClick={this.changeValue}>Record/Box Number:</div>
+                              </DropdownItem>
+                              <DropdownItem>
+                                <div onClick={this.changeValue}>Consignment Code:</div>
+                              </DropdownItem>
+                            </DropdownMenu>
+                          </Dropdown>
+
+                         <FormGroup row>
+                                            <Col sm={10}>
+                                              <Input type="text" name="numberOrConsignmentCode" value={this.state.numberOrConsignmentCode} onChange={this.handleChange}/>
+                                            </Col>
+                                          </FormGroup>
+                                          <FormGroup row>
+                                            <Button type="submit" id="submit-button" size="sm" color="secondary" value="submit">Search</Button>
+                                          </FormGroup>
+                       </Form>
+
+                    </div>
+              </Col>
+            </Row>
+          </TabPane>
+          <TabPane tabId="2">
+            <Row>
+              <Col sm="20">
+                <div className="animated fadeIn">
+                    <Form onSubmit={this.handleSubmitFullTextSearch}>
+                         <FormGroup row>
+                                            <Label for="Number" sm={20}> Enter a valid Record/Box Number, Record/Box Title, Record/Box Notes or Box Consignment Id:</Label>
+                                            <Col sm={10}>
+                                              <Input type="text" name="Number" value={this.state.Number} onChange={this.handleChange}/>
+                                            </Col>
+                                          </FormGroup>
+                                          <h3>Filter By:</h3>
+                                          <FormGroup row>
+                                            <Label for="Number" sm={20}>Record Type:</Label>
+                                            <Col sm={10}>
+                                              <Input type="text" name="Number" value={this.state.Number} onChange={this.handleChange}/>
+                                            </Col>
+                                          </FormGroup>
+                                          <FormGroup row>
+                                            <Label for="Number" sm={20}>Location:</Label>
+                                            <Col sm={10}>
+                                              <Input type="text" name="Number" value={this.state.Number} onChange={this.handleChange}/>
+                                            </Col>
+                                          </FormGroup>
+                                          <FormGroup row>
+                                            <Label for="Number" sm={20}>Classification:</Label>
+                                            <Col sm={10}>
+                                              <Input type="text" name="Number" value={this.state.Number} onChange={this.handleChange}/>
+                                            </Col>
+                                          </FormGroup>
+                                          <FormGroup row>
+                                            <Label for="Number" sm={20}>All date fields:</Label>
+                                            <Col sm={10}>
+                                              <Input type="text" name="Number" value={this.state.Number} onChange={this.handleChange}/>
+                                            </Col>
+                                          </FormGroup>
+                                          <FormGroup row>
+                                            <Label for="Number" sm={20}>Record State:</Label>
+                                            <Col sm={10}>
+                                              <Input type="text" name="Number" value={this.state.Number} onChange={this.handleChange}/>
+                                            </Col>
+                                          </FormGroup>
+                                          <FormGroup row>
+                                            <Label for="Number" sm={20}>Retention Schedules:</Label>
+                                            <Col sm={10}>
+                                              <Input type="text" name="Number" value={this.state.Number} onChange={this.handleChange}/>
+                                            </Col>
+                                          </FormGroup>
+                                          <FormGroup row>
+                                            <Button type="submit" id="submit-button" size="sm" color="secondary" value="submit">Search</Button>
+                                          </FormGroup>
+                       </Form>
+
+                    </div>
+              </Col>
+            </Row>
+          </TabPane>
+        </TabContent>
+      </div>
         );
     }
 }
 
+/*
+
+class ChooseSearchType extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.changeValue = this.changeValue.bind(this);
+
+    this.state = {
+      dropdownOpen: false,
+      dropdownValue: "Please Select a Search Method"
+    };
+  }
+
+  toggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+
+  changeValue(e) {
+
+    this.setState({
+          dropdownValue: e.currentTarget.textContent
+    });
+
+    console.log('Dashboard.state: ' + Dashboard.state)
+    if (e.currentTarget.textContent == "Quick Search") {
+        Dashboard.setState({show:true});
+    }
+  }
 
 
+  render() {
+    return (
+        <div>
+          <h3><b>Search Type: </b></h3>
+          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle caret>
+              {this.state.dropdownValue}
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>
+                  <div onClick={this.changeValue}>Quick Search</div>
+              </DropdownItem>
+              <DropdownItem>
+                  <div onClick={this.changeValue}>Full Text Search</div>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+      </div>
+    );
+  }
+}
+*/
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
-    }
-
+    };
 
 
     render() {
@@ -299,12 +546,18 @@ class Dashboard extends React.Component {
                 <div>
 
                     <SearchBar />
-                    <ResultsTable results={th} addToRecordLabels={this.props.addToRecordLabels} addToEndTabLabels={this.props.addToEndTabLabels} addToContainerReports={this.props.addToContainerReports} addToEnclosureReports={this.props.addToEnclosureReports}/>
+
                 </div>
             </div>
         );
     }
 }
 
+/*TODO: add
+<ResultsTable results={th} addToRecordLabels={this.props.addToRecordLabels} addToEndTabLabels={this.props.addToEndTabLabels} addToContainerReports={this.props.addToContainerReports} addToEnclosureReports={this.props.addToEnclosureReports}/>
+between <SearchBar />
+and </div>
+later
+*/
 
 export default Dashboard;
