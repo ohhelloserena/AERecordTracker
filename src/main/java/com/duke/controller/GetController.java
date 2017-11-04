@@ -2,6 +2,7 @@ package com.duke.controller;
 
 
 import com.duke.Dao.recordDao;
+import com.duke.Entity.CustomAttributeValues;
 import com.duke.Entity.Locations;
 import com.duke.Entity.record;
 //import com.sun.org.apache.xpath.internal.operations.String;
@@ -165,7 +166,12 @@ public class GetController {
      */
 
     @CrossOrigin
-    @ResponseBody @RequestMapping(value = "/consignmentCode", method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @RequestMapping(
+            value = "/consignmentCode",
+            method = RequestMethod.POST,
+            consumes= MediaType.APPLICATION_JSON_VALUE
+    )
     public java.lang.String SearchRecordsByConsignmentCode(@RequestBody String params) {
         System.out.print("this SearchRecordsByConsignmentCode respond happened");
         JSONObject obj = new JSONObject();
@@ -189,7 +195,12 @@ public class GetController {
      */
 
     @CrossOrigin
-    @ResponseBody @RequestMapping(value = "/number", method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @RequestMapping(
+            value = "/number",
+            method = RequestMethod.POST,
+            consumes= MediaType.APPLICATION_JSON_VALUE
+    )
     public java.lang.String SearchRecordsByRecordNumber(@RequestBody String params) {
         System.out.print("this SearchRecordsByRecordNumber respond happened");
         JSONObject obj = new JSONObject();
@@ -226,23 +237,70 @@ public class GetController {
      *
      * Input ex: { "RecordId": "61" }
      *
-     * @param params
-     * @return
      */
 
 
     @CrossOrigin
-    @ResponseBody @RequestMapping(value = "/location", method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @RequestMapping(
+            value = "/location",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
     public java.lang.String SearchRecordLocationName(@RequestBody String params) {
         System.out.println("in GetRecordLocationName()");
+
         JSONObject obj = new JSONObject();
         JSONObject jsonObj = new JSONObject(params);
-        String likeRecordId= jsonObj.getString("RecordId");
+        String likeRecordId = jsonObj.getString("RecordId");
 
         List<Locations> results = RecordDao.GetRecordLocationForRecord(likeRecordId);
         obj.put("results", results);
         return obj.toString();
     }
+
+    /**
+     * POST request to get all columns from customattributevalues for customattributevalues == 7 and the given record ID.
+     *
+     * /records/CustomAttributeValues
+     *
+     * Input ex: { "RecordId": "252" }
+     *
+     */
+
+    @CrossOrigin
+    @ResponseBody
+    @RequestMapping(
+            value = "/CustomAttributeValues",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+
+    public java.lang.String SearchRecordClientName(@RequestBody String params) {
+        System.out.println("in SearchRecordClientName()");
+
+        JSONObject obj = new JSONObject();
+        JSONObject jsonObj = new JSONObject(params);
+        String likeRecordId = jsonObj.getString("RecordId");
+
+        List<CustomAttributeValues> results = RecordDao.GetCustAttrValByRecordId(likeRecordId);
+        obj.put("results", results);
+        return obj.toString();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
