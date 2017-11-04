@@ -2,6 +2,7 @@ package com.duke.controller;
 
 
 import com.duke.Dao.recordDao;
+import com.duke.Entity.Classifications;
 import com.duke.Entity.CustomAttributeValues;
 import com.duke.Entity.Locations;
 import com.duke.Entity.record;
@@ -288,19 +289,36 @@ public class GetController {
         return obj.toString();
     }
 
+    /**
+     * POST request to get classifications.Name and recordclassifications.Ordinal for given record id.
+     *
+     * Used to get record's classification path.
+     *
+     * /records/ClassificationPath
+     *
+     * Input ex: { "RecordId": "252" }
+     *
+     */
 
+    @CrossOrigin
+    @ResponseBody
+    @RequestMapping(
+            value = "/ClassificationPath",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
 
+    public java.lang.String SearchRecordClassPath(@RequestBody String params) {
+        System.out.println("in SearchRecordClassPath()");
 
+        JSONObject obj = new JSONObject();
+        JSONObject jsonObj = new JSONObject(params);
+        String likeRecordId = jsonObj.getString("RecordId");
 
-
-
-
-
-
-
-
-
-
+        List<Classifications> results = RecordDao.GetClassPath(likeRecordId);
+        obj.put("results", results);
+        return obj.toString();
+    }
 
 
 }
