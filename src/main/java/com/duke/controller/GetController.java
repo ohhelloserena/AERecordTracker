@@ -262,7 +262,7 @@ public class GetController {
     /**
      * POST request to get all columns from customattributevalues for customattributevalues == 7 and the given record ID.
      *
-     * /records/CustomAttributeValues
+     * /records/ClientName
      *
      * Input ex: { "RecordId": "252" }
      *
@@ -271,7 +271,7 @@ public class GetController {
     @CrossOrigin
     @ResponseBody
     @RequestMapping(
-            value = "/CustomAttributeValues",
+            value = "/ClientName",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
