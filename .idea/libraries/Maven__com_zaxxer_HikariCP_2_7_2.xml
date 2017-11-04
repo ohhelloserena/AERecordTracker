@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/2.7.2/HikariCP-2.7.2.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/2.7.2/HikariCP-2.7.2-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/2.7.2/HikariCP-2.7.2-sources.jar!/" />
     </SOURCES>
