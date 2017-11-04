@@ -2,6 +2,7 @@ package com.duke.controller;
 
 
 import com.duke.Dao.recordDao;
+import com.duke.Entity.Locations;
 import com.duke.Entity.record;
 //import com.sun.org.apache.xpath.internal.operations.String;
 import org.json.JSONObject;
@@ -205,7 +206,7 @@ public class GetController {
      *
      * /records/notes?text=text
      *
-     * Input ex: {text: "Molestiae cum"}
+     * Input ex: {"text": "Molestiae cum"}
      *
      * @param text
      * @return
@@ -217,4 +218,31 @@ public class GetController {
         System.out.print("GET request to search notes, text is " + '%' + text + '%');
         return RecordDao.SearchRecordsByNotes("\'%" + text + "%\'").toString();
     }
+
+    /**
+     * POST request to get record location name of record, given record id.
+     *
+     * /records/location
+     *
+     * Input ex: { "RecordId": "61" }
+     *
+     * @param params
+     * @return
+     */
+
+
+    @CrossOrigin
+    @ResponseBody @RequestMapping(value = "/location", method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE)
+    public java.lang.String SearchRecordLocationName(@RequestBody String params) {
+        System.out.println("in GetRecordLocationName()");
+        JSONObject obj = new JSONObject();
+        JSONObject jsonObj = new JSONObject(params);
+        String likeRecordId= jsonObj.getString("RecordId");
+
+        List<Locations> results = RecordDao.GetRecordLocationForRecord(likeRecordId);
+        obj.put("results", results);
+        return obj.toString();
+    }
+
+
 }
