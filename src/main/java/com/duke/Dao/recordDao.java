@@ -1,8 +1,6 @@
 package com.duke.Dao;
 
-import com.duke.Entity.Locations;
-import com.duke.Entity.noteSearch;
-import com.duke.Entity.record;
+import com.duke.Entity.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -201,7 +199,7 @@ public class recordDao {
      *
      * Inner join on locations and records tables.
      *
-     * @param RecordId from record table
+     * @param RecordId Id from records table
      * @return
      */
 
@@ -227,6 +225,84 @@ public class recordDao {
         }, RecordId);
         return locationsList;
     }
+
+    /**
+     * Returns all columns from customattributevalues for customattributevalues == 7 and the given record ID.
+     *
+     * Inner join on customattributevalues and records tables
+     *
+     * @param RecordId Id from records table
+     * @return
+     */
+
+    public List<CustomAttributeValues> GetCustAttrValByRecordId(String RecordId) {
+        //final String sql = "SELECT customattributevalues.*, notes.Text FROM customattributevalues INNER JOIN records ON customattributevalues.RecordId = records.Id INNER JOIN notes ON customattributevalues.RecordId = notes.RowId WHERE records.id = ? ";
+
+        final String sql = "SELECT * FROM customattributevalues INNER JOIN records ON customattributevalues.RecordId = records.Id WHERE customattributevalues.AttrId = 7 AND records.id = ? ";
+        final List<CustomAttributeValues> queryList = jdbcTemplate.query(sql, new ResultSetExtractor<List<CustomAttributeValues>>() {
+
+            @Override
+            public List<CustomAttributeValues> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<CustomAttributeValues> list = new ArrayList<CustomAttributeValues>();
+
+
+                while (resultSet.next()) {
+                    CustomAttributeValues obj = new CustomAttributeValues();
+
+                    obj.setId(resultSet.getInt("customattributevalues.Id"));
+                    obj.setAttrId(resultSet.getInt("customattributevalues.AttrId"));
+                    obj.setRecordId(resultSet.getInt("customattributevalues.RecordId"));
+                    obj.setValue(resultSet.getString("customattributevalues.Value"));
+
+                    list.add(obj);
+                }
+                System.out.println(list);
+                return list;
+            }
+        }, RecordId);
+        return queryList;
+    }
+
+    /**
+     * Returns recordclassifications.RecordId, classifications.Name and recordclassifications.Ordinal for the given record id.
+     *
+     * @param RecordId
+     * @return
+     */
+    public List<Classifications> GetClassPath(String RecordId) {
+        final String sql = "SELECT recordclassifications.RecordId, recordclassifications.Ordinal, classifications.Name FROM classifications  INNER JOIN recordclassifications ON classifications.Id = recordclassifications.ClassId  WHERE recordclassifications.RecordId = ? ORDER BY recordclassifications.Ordinal ASC";
+
+        final List<Classifications> queryList = jdbcTemplate.query(sql, new ResultSetExtractor<List<Classifications>>() {
+
+            @Override
+            public List<Classifications> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<Classifications> list = new ArrayList<Classifications>();
+
+                while (resultSet.next()) {
+                    Classifications obj = new Classifications();
+
+                    obj.setRecordId(resultSet.getInt("recordclassifications.RecordId"));
+                    obj.setOrdinal(resultSet.getInt("recordclassifications.Ordinal"));
+                    obj.setName(resultSet.getString("classifications.Name"));
+
+                    list.add(obj);
+                }
+                System.out.println(list);
+                return list;
+            }
+        }, RecordId);
+        return queryList;
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 }
