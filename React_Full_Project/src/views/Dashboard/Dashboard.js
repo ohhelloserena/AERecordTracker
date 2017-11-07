@@ -91,7 +91,8 @@ function filterJSON(input, crit)
 var th;
 var request = new XMLHttpRequest();
 /* TODO: Uncomment this later
-request.open('POST', 'http://127.0.0.1:8080/records/consignmentCode', false);
+//request.open('POST', 'http://127.0.0.1:8080/records/consignmentCode', false);
+ request.open('POST', 'http://ec2-18-216-98-124.us-east-2.compute.amazonaws.com:8080/records/consignmentCode', false); //for production
 request.setRequestHeader("Content-type", "application/json");
 
 //TODO: shouldn't get records on page load, it should be after user performs query
