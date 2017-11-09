@@ -230,7 +230,7 @@ public class GetController {
         System.out.print("GET request to search notes, text is " + '%' + text + '%');
         return RecordDao.SearchRecordsByNotes("\'%" + text + "%\'").toString();
     }
-    
+
 
     /**
      * POST request to get classifications.Name and recordclassifications.Ordinal for given record id.
