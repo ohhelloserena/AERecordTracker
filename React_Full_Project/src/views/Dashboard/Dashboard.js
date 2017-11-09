@@ -309,6 +309,20 @@ class SearchBar extends React.Component {
         updatedTillmm:'',
         updatedTilldd:'',
 
+          //TODO: closedAt
+
+          closedyyyy:'',
+          closedmm:'',
+          closeddd:'',
+
+          closedFromyyyy:'',
+          closedFrommm:'',
+          closedFromdd:'',
+
+          closedTillyyyy:'',
+          closedTillmm:'',
+          closedTilldd:'',
+
         stateId: '',
         retentionSchedules: '',
 
@@ -327,6 +341,12 @@ class SearchBar extends React.Component {
           collapseUpdatedFromTill: true,
         collapseUpdatedFrom: true,
         collapseUpdatedTill: true,
+
+          //TODO: closedAt
+          collapseClosed: false,
+          collapseClosedFromTill: true,
+          collapseClosedFrom: true,
+          collapseClosedTill: true,
 
         numberOrConsignmentCode: '',
 
@@ -353,6 +373,10 @@ class SearchBar extends React.Component {
       this.toggleCollapseUpdatedFrom = this.toggleCollapseUpdatedFrom.bind(this);
       this.toggleCollapseUpdatedTill = this.toggleCollapseUpdatedTill.bind(this);
 
+      //TODO: closedAt
+         this.toggleCollapseClosed = this.toggleCollapseClosed.bind(this);
+         this.toggleCollapseClosedFrom = this.toggleCollapseClosedFrom.bind(this);
+         this.toggleCollapseClosedTill = this.toggleCollapseClosedTill.bind(this);
 
     }
 
@@ -438,10 +462,38 @@ class SearchBar extends React.Component {
                     ? {name:"updatedAt",type:"GT",value:[this.state.updatedFromyyyy, this.state.updatedFrommm, this.state.updatedFromdd]} : undefined),
 
 
+                //TODO: closedAt
+
+                (this.state.collapseClosed
+                && this.state.closedyyyy != ""
+                && this.state.closedmm != ""
+                && this.state.closeddd != ""
+                    ? {name:"closedAt",type:"EQ",value:[this.state.closedyyyy, this.state.closedmm, this.state.closeddd]} : undefined),
+
+                //second case: from beginning to date
+
+                (!this.state.collapseClosed
+                && this.state.collapseClosedTill
+                && this.state.closedTillyyyy != ""
+                && this.state.closedTillmm != ""
+                && this.state.closedTilldd != ""
+                    ? {name:"closedAt",type:"LT",value:[this.state.closedTillyyyy, this.state.closedTillmm, this.state.closedTilldd]} : undefined),
+
+                (!this.state.collapseClosed
+                && this.state.collapseClosedFrom
+                && this.state.closedFromyyyy != ""
+                && this.state.closedFrommm != ""
+                && this.state.closedFromdd != ""
+                    ? {name:"closedAt",type:"GT",value:[this.state.closedFromyyyy, this.state.closedFrommm, this.state.closedFromdd]} : undefined),
+
                 (this.state.stateId != '' ? {name:"stateId",type:"EQ",value:this.state.stateId} : undefined),
                 (this.state.retentionSchedules != '' ? {name:"retentionSchedules",type:"EQ",value:this.state.retentionSchedules} : undefined),
             ]}];
 
+        result[1]['filter'] = result[1]['filter'].filter(function(x) {
+            x !== null;
+            return x;
+        });
         console.log('A bunch of record queries are submitted: ' + JSON.stringify(result));
         event.preventDefault();
     }
@@ -510,6 +562,21 @@ class SearchBar extends React.Component {
       toggleCollapseUpdatedTill() {
         this.setState({ collapseUpdatedTill: !this.state.collapseUpdatedTill });
       }
+
+      //TODO: closedAt
+    toggleCollapseClosed() {
+        this.setState({
+            collapseClosed: !this.state.collapseClosed,
+            collapseClosedFromTill: !this.state.collapseClosedFromTill
+        });
+    }
+    toggleCollapseClosedFrom() {
+        this.setState({ collapseClosedFrom: !this.state.collapseClosedFrom });
+    }
+    toggleCollapseClosedTill() {
+        this.setState({ collapseClosedTill: !this.state.collapseClosedTill });
+    }
+
 
 
       changeValue(e) {
@@ -759,6 +826,82 @@ class SearchBar extends React.Component {
                                           </FormGroup>
                                           </Collapse>
                                         </Collapse>
+
+                        <FormGroup row>
+                            <Label for="dateClosed" sm={20}>Date Closed (yyyy/mm/dd): </Label>
+                            <Label check>
+                                {' '}<Input type="checkbox" onClick={this.toggleCollapseClosed}/>{' '}
+                                Check this if you just want one specific date
+                            </Label>
+                        </FormGroup>
+
+                        <Collapse sm={20} isOpen={this.state.collapseClosed}>
+                            <FormGroup row>
+                                <Col sm={2}>
+                                    <Input type="text" name="closedyyyy" value={this.state.closedyyyy} onChange={this.handleChange}/>
+                                </Col>
+                                /
+                                <Col sm={2}>
+                                    <Input type="text" name="closedmm" value={this.state.closedmm} onChange={this.handleChange}/>
+                                </Col>
+                                /
+                                <Col sm={2}>
+                                    <Input type="text" name="closeddd" value={this.state.closeddd} onChange={this.handleChange}/>
+                                </Col>
+                            </FormGroup>
+                        </Collapse>
+
+                        <Collapse sm={20} isOpen={this.state.collapseClosedFromTill}>
+                            <FormGroup row>
+                                <Label for="dateClosed" sm={20}>From{' '}</Label>
+                                <Label check>
+                                    {' '}<Input type="checkbox" onClick={this.toggleCollapseClosedFrom}/>{' '}
+                                    Beginning
+                                </Label>
+                            </FormGroup>
+
+                            <Collapse sm={20} isOpen={this.state.collapseClosedFrom}>
+                                <FormGroup row>
+                                    <Col sm={2}>
+                                        <Input type="text" name="closedFromyyyy" value={this.state.closedFromyyyy} onChange={this.handleChange}/>
+                                    </Col>
+                                    /
+                                    <Col sm={2}>
+                                        <Input type="text" name="closedFrommm" value={this.state.closedFrommm} onChange={this.handleChange}/>
+                                    </Col>
+                                    /
+                                    <Col sm={2}>
+                                        <Input type="text" name="closedFromdd" value={this.state.closedFromdd} onChange={this.handleChange}/>
+                                    </Col>
+                                </FormGroup>
+                            </Collapse>
+
+                            <FormGroup row>
+                                <Label for="dateClosed" sm={20}>Till</Label>
+                                <Label check>
+                                    {' '}<Input type="checkbox" onClick={this.toggleCollapseClosedTill}/>{' '}
+                                    Now
+                                </Label>
+                            </FormGroup>
+
+                            <Collapse sm={20} isOpen={this.state.collapseClosedTill}>
+                                <FormGroup row>
+                                    <Col sm={2}>
+                                        <Input type="text" name="closedTillyyyy" value={this.state.closedTillyyyy} onChange={this.handleChange}/>
+                                    </Col>
+                                    /
+                                    <Col sm={2}>
+                                        <Input type="text" name="closedTillmm" value={this.state.closedTillmm} onChange={this.handleChange}/>
+                                    </Col>
+                                    /
+                                    <Col sm={2}>
+                                        <Input type="text" name="closedTilldd" value={this.state.closedTilldd} onChange={this.handleChange}/>
+                                    </Col>
+                                </FormGroup>
+                            </Collapse>
+
+                        </Collapse>
+
 
                                           <FormGroup row>
                                             <Label for="recordState" sm={20}>Record State:</Label>
