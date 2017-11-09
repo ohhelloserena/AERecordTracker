@@ -1,6 +1,6 @@
 package com.duke.Entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class record {
 
@@ -24,7 +24,14 @@ public class record {
     private Boolean hasPrintedEndTabLabel;
 
 
-    public record(int id, int AttrId, int RecordId, String Value, String title, String number, int scheduleId, int typeId, int stateId, int containerId, int locationId, java.sql.Timestamp createdAt, java.sql.Timestamp updatedAt, java.sql.Timestamp closedAt, String consignmentCode, String recordStateName){
+    private String locationName;    // for locations.Name
+    private String notesText;       // for notes.Text
+    private String clientName;      // for customattributevalues.Value
+
+
+
+
+    public record(int id, int AttrId, int RecordId, String Value, String title, String number, int scheduleId, int typeId, int stateId, int containerId, int locationId, Timestamp createdAt, Timestamp updatedAt, Timestamp closedAt, String consignmentCode, String recordStateName, String locationName, String notesText, String clientName){
         this.id= id;
         this.AttrId = AttrId;
         this.RecordId=RecordId;
@@ -41,6 +48,9 @@ public class record {
         this.closedAt = closedAt;
         this.consignmentCode = consignmentCode;
         this.recordStateName = recordStateName;
+        this.locationName = locationName;
+        this.notesText = notesText;
+        this.clientName = clientName;
         this.hasPrintedLabel = false;
         this.hasPrintedEndTabLabel = false;
     }
@@ -182,4 +192,28 @@ public class record {
     public Boolean getHasPrintedEndTabLabel() { return hasPrintedEndTabLabel; }
 
     public void setHasPrintedEndTabLabel(Boolean hasPrintedEndTabLabel) { this.hasPrintedEndTabLabel = hasPrintedEndTabLabel; }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    public String getNotesText() {
+        return notesText;
+    }
+
+    public void setNotesText(String notesText) {
+        this.notesText = notesText;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
 }

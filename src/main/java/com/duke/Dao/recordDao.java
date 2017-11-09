@@ -9,12 +9,15 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+
 import javax.xml.stream.Location;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * recordDao class gets data from the MySQL database.
@@ -75,69 +78,56 @@ public class recordDao {
     /**
      * Search by ConsignmentCode.
      *
+     * Returns all rows of records, location.Name (location_name), notes.Text (notes), and cutomattributevalues.Value (client_name)
+     *
      * @param consignmentCode
      * @return
      */
 
     public List<record> SearchRecordsByConsignmentCode(String consignmentCode) {
-        final String sql = "SELECT * FROM records WHERE ConsignmentCode = ?";
-        List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
-            public record mapRow(ResultSet resultSet, int Id) throws SQLException {
-                record records = new record();
-                records.setId(resultSet.getInt("Id"));
-                records.setNumber(resultSet.getString("Number"));
-                records.setTitle(resultSet.getString("Title"));
-                records.setScheduleId(resultSet.getInt("ScheduleId"));
-                records.setTypeId(resultSet.getInt("TypeId"));
-                records.setConsignmentCode(resultSet.getString("ConsignmentCode"));
-                records.setStateId(resultSet.getInt("StateId"));
-                records.setContainerId(resultSet.getInt("ContainerId"));
-                records.setLocationId(resultSet.getInt("LocationId"));
-                java.util.Date createdDate = resultSet.getDate("CreatedAt");
-                java.util.Date updatedDate = resultSet.getDate("UpdatedAt");
-                java.util.Date closedDate = resultSet.getDate("ClosedAt");
-                records.setCreatedAt(new java.sql.Timestamp(createdDate.getTime()));
-                records.setUpdatedAt(new java.sql.Timestamp(updatedDate.getTime()));
-                records.setClosedAt(new java.sql.Timestamp(closedDate.getTime()));
-                System.out.print(records);
-                return records;
+        final String sql = "SELECT records.*, COALESCE(locations.Name, 'NA') AS location_name, COALESCE(notes.Text, 'NA') AS notes, COALESCE(customattributevalues.Value, 'NA') AS client_name FROM recordr.records INNER JOIN locations ON locations.Id = records.LocationId LEFT JOIN notes ON notes.RowId=records.Id AND notes.TableId = 26 LEFT JOIN customattributevalues ON customattributevalues.RecordId = records.Id AND customattributevalues.AttrId = 9 WHERE records.ConsignmentCode = ?";
+
+        final List<record> recordList = jdbcTemplate.query(sql, new ResultSetExtractor<List<record>>() {
+
+            @Override
+            public List<record> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<record> list = new ArrayList<record>();
+
+                while (resultSet.next()) {
+
+                    record l = new record();
+
+                    //from records table
+                    l.setId(resultSet.getInt("records.Id"));
+                    l.setNumber(resultSet.getString("records.Number"));
+                    l.setTitle(resultSet.getString("records.Title"));
+                    l.setScheduleId(resultSet.getInt("records.ScheduleId"));
+                    l.setTypeId(resultSet.getInt("records.TypeId"));
+                    l.setConsignmentCode(resultSet.getString("records.ConsignmentCode"));
+                    l.setStateId(resultSet.getInt("records.StateId"));
+                    l.setContainerId(resultSet.getInt("records.ContainerId"));
+                    l.setLocationId(resultSet.getInt("records.LocationId"));
+                    java.util.Date createdDate = resultSet.getDate("records.CreatedAt");
+                    java.util.Date updatedDate = resultSet.getDate("records.UpdatedAt");
+                    java.util.Date closedDate = resultSet.getDate("records.ClosedAt");
+                    l.setCreatedAt(new java.sql.Timestamp(createdDate.getTime()));
+                    l.setUpdatedAt(new java.sql.Timestamp(updatedDate.getTime()));
+                    l.setClosedAt(new java.sql.Timestamp(closedDate.getTime()));
+
+                    l.setLocationName(resultSet.getString("location_name"));
+                    l.setNotesText(resultSet.getString("notes"));
+                    l.setClientName(resultSet.getString("client_name"));
+
+                    list.add(l);
+                }
+
+                System.out.println(list);
+                return list;
             }
         }, consignmentCode);
-        return Record;
+        return recordList;
     }
 
-    /**
-     * Search by Record Number.
-     *
-     * @param number - the record number
-     * @return
-     */
-    public List<record> SearchRecordsByRecordNumber(String number) {
-        final String sql = "SELECT * FROM records WHERE Number = ?";
-        List<record> Record = jdbcTemplate.query(sql, new RowMapper<record>() {
-            public record mapRow(ResultSet resultSet, int Id) throws SQLException {
-                record records = new record();
-                records.setId(resultSet.getInt("Id"));
-                records.setNumber(resultSet.getString("Number"));
-                records.setTitle(resultSet.getString("Title"));
-                records.setScheduleId(resultSet.getInt("ScheduleId"));
-                records.setTypeId(resultSet.getInt("TypeId"));
-                records.setConsignmentCode(resultSet.getString("ConsignmentCode"));
-                records.setStateId(resultSet.getInt("StateId"));
-                records.setContainerId(resultSet.getInt("ContainerId"));
-                records.setLocationId(resultSet.getInt("LocationId"));
-                java.util.Date createdDate = resultSet.getDate("CreatedAt");
-                java.util.Date updatedDate = resultSet.getDate("UpdatedAt");
-                java.util.Date closedDate = resultSet.getDate("ClosedAt");
-                records.setCreatedAt(new java.sql.Timestamp(createdDate.getTime()));
-                records.setUpdatedAt(new java.sql.Timestamp(updatedDate.getTime()));
-                records.setClosedAt(new java.sql.Timestamp(closedDate.getTime()));
-                System.out.print(records);
-                return records;
-            }
-        }, number);
-        return Record;
-    }
 
     /**
      * Full text search on notes.
@@ -293,6 +283,63 @@ public class recordDao {
         }, RecordId);
         return queryList;
     }
+
+
+
+    /**
+     * Search for record by record number.
+     *
+     * Returns all rows of records, location.Name (location_name), notes.Text (notes), and cutomattributevalues.Value (client_name)
+     *
+     * @param recordNumber - records.Number
+     * @return
+     */
+
+
+    public List<record> SearchByRecordNumber(String recordNumber) {
+        final String sql = "SELECT records.*, COALESCE(locations.Name, 'NA') AS location_name, COALESCE(notes.Text, 'NA') AS notes, COALESCE(customattributevalues.Value, 'NA') AS client_name FROM recordr.records INNER JOIN locations ON locations.Id = records.LocationId LEFT JOIN notes ON notes.RowId=records.Id AND notes.TableId = 26 LEFT JOIN customattributevalues ON customattributevalues.RecordId = records.Id AND customattributevalues.AttrId = 9 WHERE records.Number = ?";
+
+
+        final List<record> recordList = jdbcTemplate.query(sql, new ResultSetExtractor<List<record>>() {
+
+            @Override
+            public List<record> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<record> list = new ArrayList<record>();
+
+                while (resultSet.next()) {
+                    record l = new record();
+
+                    //from records table
+                    l.setId(resultSet.getInt("records.Id"));
+                    l.setNumber(resultSet.getString("records.Number"));
+                    l.setTitle(resultSet.getString("records.Title"));
+                    l.setScheduleId(resultSet.getInt("records.ScheduleId"));
+                    l.setTypeId(resultSet.getInt("records.TypeId"));
+                    l.setConsignmentCode(resultSet.getString("records.ConsignmentCode"));
+                    l.setStateId(resultSet.getInt("records.StateId"));
+                    l.setContainerId(resultSet.getInt("records.ContainerId"));
+                    l.setLocationId(resultSet.getInt("records.LocationId"));
+                    java.util.Date createdDate = resultSet.getDate("records.CreatedAt");
+                    java.util.Date updatedDate = resultSet.getDate("records.UpdatedAt");
+                    java.util.Date closedDate = resultSet.getDate("records.ClosedAt");
+                    l.setCreatedAt(new java.sql.Timestamp(createdDate.getTime()));
+                    l.setUpdatedAt(new java.sql.Timestamp(updatedDate.getTime()));
+                    l.setClosedAt(new java.sql.Timestamp(closedDate.getTime()));
+
+                    l.setLocationName(resultSet.getString("location_name"));
+                    l.setNotesText(resultSet.getString("notes"));
+                    l.setClientName(resultSet.getString("client_name"));
+
+                    list.add(l);
+                }
+
+                System.out.println(list);
+                return list;
+            }
+        }, recordNumber);
+        return recordList;
+    }
+
 
 
 
