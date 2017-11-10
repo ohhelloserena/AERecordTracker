@@ -57,12 +57,11 @@
             <artifactId>json</artifactId>
             <version>20171018</version>
         </dependency>
-<<<<<<< HEAD
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>RELEASE</version>
-=======
+		</dependency>
 
         <dependency>
             <!-- Import dependency management from Spring Boot -->
@@ -71,7 +70,6 @@
             <version>1.5.8.RELEASE</version>
             <type>pom</type>
             <scope>import</scope>
->>>>>>> e4b90207945382e5915934c0c90d8410d4a6840d
         </dependency>
 
 
