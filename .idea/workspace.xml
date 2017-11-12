@@ -1,9 +1,19 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50232207-8533-40da-802c-8ebd1670e780" name="Default" comment="Various changes">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/React_Full_Project/src/components/PrintQueue/PrintQueue.js" afterPath="$PROJECT_DIR$/React_Full_Project/src/components/PrintQueue/PrintQueue.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$1.class" afterPath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$2.class" afterPath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$3.class" afterPath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$4.class" afterPath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$5.class" afterPath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao.class" afterPath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/duke/controller/GetController.class" afterPath="$PROJECT_DIR$/target/classes/com/duke/controller/GetController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/avengers.iml" afterPath="$PROJECT_DIR$/avengers.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" afterPath="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/application.properties" afterPath="$PROJECT_DIR$/target/classes/application.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -38,11 +48,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PrintQueue.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PrintQueue.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/React_Full_Project/src/components/PrintQueue/PrintQueue.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="395" column="24" lean-forward="true" selection-start-line="395" selection-start-column="24" selection-end-line="395" selection-end-column="24" />
+            <state relative-caret-position="-2063">
+              <caret line="395" column="24" lean-forward="false" selection-start-line="395" selection-start-column="24" selection-end-line="395" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GetController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="395">
+              <caret line="283" column="1" lean-forward="true" selection-start-line="283" selection-start-column="1" selection-end-line="283" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="recordDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="375" column="0" lean-forward="true" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1889#1897#0" expanded="true" />
+                <element signature="e#2457#3806#0" expanded="true" />
+                <element signature="e#3805#3806#0" expanded="true" />
+                <element signature="e#19520#21381#0" expanded="true" />
+                <element signature="e#21380#21381#0" expanded="true" />
+                <marker date="1510476225000" expanded="true" signature="1019:1088" ph="SELECT Id,At... customattributevalues" />
+                <marker date="1510476225000" expanded="true" signature="2331:2400" ph="SELECT * FRO... records" />
+                <marker date="1510476225000" expanded="true" signature="4194:4650" ph="SELECT recor... records" />
+                <marker date="1510476225000" expanded="true" signature="7099:7242" ph="select recor... notes" />
+                <marker date="1510476225000" expanded="true" signature="9681:9794" ph="SELECT locat... locations" />
+                <marker date="1510476225000" expanded="true" signature="11104:11263" ph="SELECT * FRO... customattributevalues" />
+                <marker date="1510476225000" expanded="true" signature="12573:12857" ph="SELECT recor... classifications" />
+                <marker date="1510476225000" expanded="true" signature="14124:14571" ph="SELECT recor... records" />
+                <marker date="1510476225000" expanded="true" signature="17330:17467" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="17539:17558" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="17706:17725" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="17873:17892" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="18040:18059" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="18206:18224" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="18370:18388" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="18533:18542" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="18685:18695" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="18899:18919" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="19047:19057" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="19198:19209" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510476225000" expanded="true" signature="19310:19319" ph="SELECT * FRO... FullTextTable" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -65,6 +135,8 @@
       <find>this response happened</find>
       <find>SELECT</find>
       <find>this respond happened</find>
+      <find>ssshhh</find>
+      <find>helper</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -93,10 +165,10 @@
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/duke/Entity/RecordClassifications.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/duke/Entity/Classifications.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/React_Full_Project/src/components/PrintQueue/PrintQueue.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" />
       </list>
     </option>
   </component>
@@ -113,14 +185,11 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/React_Full_Project/node_modules" />
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-13" />
-    <option name="y" value="23" />
-    <option name="width" value="2762" />
-    <option name="height" value="1573" />
+    <option name="x" value="15" />
+    <option name="y" value="34" />
+    <option name="width" value="1440" />
+    <option name="height" value="873" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -139,6 +208,8 @@
     <panes>
       <pane id="Scratches" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -149,35 +220,49 @@
             <path>
               <item name="ae.the-avengers" type="b2602c69:ProjectViewProjectNode" />
               <item name="ae.the-avengers" type="462c0819:PsiDirectoryNode" />
-              <item name="React_Full_Project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ae.the-avengers" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ae.the-avengers" type="462c0819:PsiDirectoryNode" />
-              <item name="React_Full_Project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ae.the-avengers" type="b2602c69:ProjectViewProjectNode" />
               <item name="ae.the-avengers" type="462c0819:PsiDirectoryNode" />
-              <item name="React_Full_Project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ae.the-avengers" type="b2602c69:ProjectViewProjectNode" />
               <item name="ae.the-avengers" type="462c0819:PsiDirectoryNode" />
-              <item name="React_Full_Project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="PrintQueue" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ae.the-avengers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ae.the-avengers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="duke" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ae.the-avengers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ae.the-avengers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="duke" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ae.the-avengers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ae.the-avengers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -456,42 +541,44 @@
       <workItem from="1509432624838" duration="368000" />
       <workItem from="1509751889093" duration="11169000" />
       <workItem from="1509999186572" duration="166000" />
+      <workItem from="1510463152687" duration="7551000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66645000" />
+    <option name="totallyTimeSpent" value="74196000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-13" y="23" width="2762" height="1573" extended-state="0" />
+    <frame x="15" y="34" width="1440" height="873" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32709113" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35330835" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37203336" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1569853" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15694444" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18854167" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39947438" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32746956" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14325452" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -554,16 +641,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="35" column="22" lean-forward="false" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -796,14 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Entity/record.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Entity/CustomAttributeValues.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -834,12 +903,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/React_Full_Project/src/views/Dashboard/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13410">
+          <caret line="925" column="14" lean-forward="false" selection-start-line="925" selection-start-column="14" selection-end-line="925" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/React_Full_Project/src/components/PrintQueue/PrintQueue.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2063">
+          <caret line="395" column="24" lean-forward="false" selection-start-line="395" selection-start-column="24" selection-end-line="395" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Entity/record.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1316">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1401">
-          <caret line="324" column="0" lean-forward="false" selection-start-line="324" selection-start-column="0" selection-end-line="324" selection-end-column="0" />
+        <state relative-caret-position="395">
+          <caret line="283" column="1" lean-forward="true" selection-start-line="283" selection-start-column="1" selection-end-line="283" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20171018/json-20171018.jar!/org/json/JSONObject.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="34" column="28" lean-forward="false" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="375" column="0" lean-forward="true" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1889#1897#0" expanded="true" />
+            <element signature="e#2457#3806#0" expanded="true" />
+            <element signature="e#3805#3806#0" expanded="true" />
+            <element signature="e#19520#21381#0" expanded="true" />
+            <element signature="e#21380#21381#0" expanded="true" />
+            <marker date="1510476225000" expanded="true" signature="1019:1088" ph="SELECT Id,At... customattributevalues" />
+            <marker date="1510476225000" expanded="true" signature="2331:2400" ph="SELECT * FRO... records" />
+            <marker date="1510476225000" expanded="true" signature="4194:4650" ph="SELECT recor... records" />
+            <marker date="1510476225000" expanded="true" signature="7099:7242" ph="select recor... notes" />
+            <marker date="1510476225000" expanded="true" signature="9681:9794" ph="SELECT locat... locations" />
+            <marker date="1510476225000" expanded="true" signature="11104:11263" ph="SELECT * FRO... customattributevalues" />
+            <marker date="1510476225000" expanded="true" signature="12573:12857" ph="SELECT recor... classifications" />
+            <marker date="1510476225000" expanded="true" signature="14124:14571" ph="SELECT recor... records" />
+            <marker date="1510476225000" expanded="true" signature="17330:17467" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="17539:17558" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="17706:17725" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="17873:17892" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="18040:18059" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="18206:18224" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="18370:18388" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="18533:18542" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="18685:18695" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="18899:18919" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="19047:19057" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="19198:19209" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510476225000" expanded="true" signature="19310:19319" ph="SELECT * FRO... FullTextTable" />
           </folding>
         </state>
       </provider>
@@ -848,32 +984,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="211" column="21" lean-forward="false" selection-start-line="211" selection-start-column="21" selection-end-line="211" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React_Full_Project/src/views/Dashboard/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13410">
-          <caret line="925" column="14" lean-forward="false" selection-start-line="925" selection-start-column="14" selection-end-line="925" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React_Full_Project/src/components/PrintQueue/PrintQueue.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="395" column="24" lean-forward="true" selection-start-line="395" selection-start-column="24" selection-end-line="395" selection-end-column="24" />
           <folding />
         </state>
       </provider>

@@ -263,6 +263,22 @@ public class GetController {
         return obj.toString();
     }
 
+    @CrossOrigin
+    @ResponseBody @RequestMapping(value = "/fulltext", method = RequestMethod.POST,consumes= MediaType.APPLICATION_JSON_VALUE)
+    public java.lang.String FullText(@RequestBody String params) {
+        System.out.print("this SearchRecordsByTitle respond happened");
+        JSONObject obj = new JSONObject();
+        JSONObject jsonObj = new JSONObject(params);
+        String keyword= jsonObj.getString("keyword");
+        JSONObject filters = jsonObj.getJSONObject("filters");
+        Integer page= jsonObj.getInt("page");
+        Integer pageSize= jsonObj.getInt("pageSize");
+
+        List<JSONObject> results=RecordDao.FullTextSearch(keyword,filters,page,pageSize);
+        obj.put("results", results);
+        return obj.toString();
+    }
+
 
 
 }
