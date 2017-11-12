@@ -30,6 +30,8 @@ import {
     TabContent, TabPane, Nav, NavItem, NavLink, CardTitle, CardText,
 } from "reactstrap";
 import classnames from 'classnames';
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
 
 function getDate(input)
 { //converts the JSON's string date into an array of ints, [year, month, day]
@@ -118,11 +120,6 @@ request.send(body);
 console.log("this is th");
 console.log(th);
 
-
-var sampleFilterParam = {"filter":[{"name":"locationId","type":"EQ","value":"5"},{"name":"year","type":"GT","value":"2005"}]};
-
-
-
 //TODO: Uncomment this later (BoxRow, RecordRow, ResultsTable)
 /*
 class BoxRow extends React.Component {
@@ -193,86 +190,44 @@ class RecordRow extends React.Component {
         );
     }
 }
-
-//TODO: actual dynamic table
-//this means a table that accepts arbitrary number of columns
-//will need array of columns or something
-//(maybe user don't want to see this column but wants to see that)
-
-class ResultsTable extends React.Component {
-    render() {
-        const rows = [];
-
-        this.props.results.forEach((result) => {
-            // Create slightly different table row if box vs. record (will be needed for later)
-            if ("containerId" in result) {               // Only records have a containerId variable, so create RecordRow
-                rows.push(
-                    <RecordRow
-                        record={result}
-                        key={result.id}
-                        addToRecordLabels={this.props.addToRecordLabels}
-                        addToEndTabLabels={this.props.addToEndTabLabels}
-                    />
-                );
-            }
-            else {                                  // Create BoxRow
-                rows.push(
-                    <BoxRow
-                        box={result}
-                        key={result.id}
-                        addToContainerReports={this.props.addToContainerReports}
-                        addToEnclosureReports={this.props.addToEnclosureReports}
-                    />
-                );
-            }
-        });
-
-        return (
-            <div className="animated fadeIn">
-                <Row>
-                    <Col>
-                        <Card>
-                            <CardHeader>
-                                <i className="fa fa-align-justify"></i> Currently showing "consignmentCode": "DESTRUCTION CERTIFICATE 2009-01"
-                            </CardHeader>
-                            <CardBlock className="card-body">
-                                <Table hover bordered striped responsive size="sm">
-                                    <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Number</th>
-                                        <th>Consignment Code</th>
-                                        <th>Title</th>
-                                        <th>Location</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>{rows}</tbody>
-                                </Table>
-                                <nav>
-                                    <Pagination>
-                                        <PaginationItem><PaginationLink previous href="#">Prev</PaginationLink></PaginationItem>
-                                        <PaginationItem active><PaginationLink href="#">1</PaginationLink></PaginationItem>
-                                        <PaginationItem><PaginationLink href="#">2</PaginationLink></PaginationItem>
-                                        <PaginationItem><PaginationLink href="#">3</PaginationLink></PaginationItem>
-                                        <PaginationItem><PaginationLink href="#">4</PaginationLink></PaginationItem>
-                                        <PaginationItem><PaginationLink next href="#">Next</PaginationLink></PaginationItem>
-                                    </Pagination>
-                                </nav>
-                            </CardBlock>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-        );
-    }
-}
 */
 
+class ResultsTable extends React.Component {
+	render() {
+		let columns = [];
+		if(this.props.results.length > 0)
+		{
+			for(let key in this.props.results[0])
+			{
+				if(this.props.results[0].hasOwnProperty(key))
+				{
+					columns.push({"Header": key, "accessor": key});
+				}
+			}
+		}
 
+		let that = this;
+		return (
+			<div className="animated fadeIn">
+				<Row>
+					<Col>
+						<Card>
+							<CardBlock className="card-body">
+								<ReactTable
+									data={that.props.results}
+									columns={columns}
+								/>
+							</CardBlock>
+						</Card>
+					</Col>
+				</Row>
+			</div>
+		);
+	}
+}
 
 class SearchBar extends React.Component {
     //TODO: PAUL'S CODE
-
 
      constructor(props) {
       super(props);
@@ -986,7 +941,6 @@ class SearchBar extends React.Component {
 }
 
 /*
-
 class ChooseSearchType extends React.Component {
   constructor(props) {
     super(props);
@@ -1042,22 +996,20 @@ class ChooseSearchType extends React.Component {
 }
 */
 class Dashboard extends React.Component {
-    constructor(props) {
-        super(props);
-    };
+	constructor(props) {
+		super(props);
+	};
 
-
-    render() {
-        return (
-            <div>
-                <div>
-
-                    <SearchBar />
-
-                </div>
-            </div>
-        );
-    }
+	render() {
+		return (
+			<div>
+				<div>
+					<SearchBar/>
+					<ResultsTable results={th}/>
+				</div>
+			</div>
+		);
+	}
 }
 
 /*TODO: add
