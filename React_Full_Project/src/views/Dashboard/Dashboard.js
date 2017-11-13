@@ -76,7 +76,6 @@ function callFilter(row, index, arr)
 	return true;
 }
 
-
 //filterJSON takes two parameters
 //input is an array of records
 //criteria is an array of criterions
@@ -90,37 +89,71 @@ function filterJSON(input, crit)
 	return input.filter(callFilter, crit);
 }
 
-var th;
-var request = new XMLHttpRequest();
-/* TODO: Uncomment this later
-//request.open('POST', 'http://127.0.0.1:8080/records/consignmentCode', false);
- request.open('POST', 'http://ec2-18-216-98-124.us-east-2.compute.amazonaws.com:8080/records/consignmentCode', false); //for production
-request.setRequestHeader("Content-type", "application/json");
+var responseJSON = {"results":[]};
+var records = [];
+//let filters = [];
+var filters = [{"column":"createdAt","type":"LT","value":[2009, 12, 31]}, {"column":"createdAt","type":"GT","value":[2005, 1, 1]}];
 
-//TODO: shouldn't get records on page load, it should be after user performs query
-request.onload = function() {
-    //TODO:Front-end must create UI for filters, parse filters to a JSON to pass to filter
-	let comp = [{"column":"createdAt","type":"LT","value":[2009, 12, 31]}, {"column":"createdAt","type":"GT","value":[2005, 1, 1]}];
-    if (this.status >= 200 && this.status < 400) {
-        var data = JSON.parse(this.response);
-        //th = data.results;
-        //sample of how filtering would be done
-        th = filterJSON(data.results, comp);
-    } else {
-        console.error('Response received and there was an error');
-    }
-};
-request.onerror = function() {
-    console.error('Request error');
-};
+//call testData to fill table with sample records.
+function testData()
+{
+	let request = new XMLHttpRequest();
+	request.open('POST', 'http://127.0.0.1:8080/records/consignmentCode', false);
+	//request.open('POST', 'http://13.59.251.84:8080/records/consignmentCode', false); //for production
+	request.setRequestHeader("Content-type", "application/json");
 
-var body = JSON.stringify({"consignmentCode": "DESTRUCTION CERTIFICATE 2009-01"});
-request.send(body);
-*/
-console.log("this is th");
-console.log(th);
+	request.onload = function() {
+		let comp = [{"column":"createdAt","type":"LT","value":[2009, 12, 31]}, {"column":"createdAt","type":"GT","value":[2005, 1, 1]}];
+		if (this.status >= 200 && this.status < 400) {
+			responseJSON = JSON.parse(this.response).results;
+			records = filterJSON(responseJSON, comp);
+		} else {
+			console.error('Response received and there was an error');
+		}
+	};
+	request.onerror = function() {
+	    //TODO: display error to user
+		console.error('Request error');
+	};
 
-//TODO: Uncomment this later (BoxRow, RecordRow, ResultsTable)
+	let body = JSON.stringify({"consignmentCode": "DESTRUCTION CERTIFICATE 2009-01"});
+	request.send(body);
+	console.log("This is the in-memory response JSON:");
+	console.log(responseJSON);
+}
+
+function testDataAxios(that)
+{
+	//use Axios
+	axios.post('http://127.0.0.1:8080/records/consignmentCode', {"consignmentCode": "DESTRUCTION CERTIFICATE 2009-01"}, {headers:{"Content-type": "application/json"}})
+		.then(function (response){
+			if(response.status >= 200 && response.status < 400)
+			{
+				console.log("Received response:");
+				console.log(response);
+
+				that.responseJSON = response.data;
+				console.log("Parsed response:");
+				console.log(that.responseJSON);
+
+				that.records = filterJSON(response.data.results, filters);
+				console.log("Filtered response:");
+				console.log(that.records);
+			}
+			else
+			{
+				//TODO: notify user of error
+				console.error("Response received but there was an error, status " + response.status);
+			}
+		}).catch(function(error){
+			console.log(error);
+	});
+}
+
+testData();
+//testDataAxios(window);
+
+//TODO: Uncomment this later (BoxRow, RecordRow)
 /*
 class BoxRow extends React.Component {
     render() {
@@ -194,6 +227,21 @@ class RecordRow extends React.Component {
 
 class ResultsTable extends React.Component {
 	render() {
+	    if (this === undefined || this.props === undefined || this.props.results === undefined)
+        {
+	        return (
+                <div className="animated fadeIn">
+                    <Row>
+                        <Col>
+                            <Card>
+                                <CardBlock className="card-body">
+                                </CardBlock>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+	        );
+        }
 		let columns = [];
 		if(this.props.results.length > 0)
 		{
@@ -201,6 +249,7 @@ class ResultsTable extends React.Component {
 			{
 				if(this.props.results[0].hasOwnProperty(key))
 				{
+					//TODO: Replace header with user-readable string
 					columns.push({"Header": key, "accessor": key});
 				}
 			}
@@ -1005,7 +1054,7 @@ class Dashboard extends React.Component {
 			<div>
 				<div>
 					<SearchBar/>
-					<ResultsTable results={th}/>
+					<ResultsTable results={records}/>
 				</div>
 			</div>
 		);
