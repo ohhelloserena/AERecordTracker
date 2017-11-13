@@ -410,31 +410,80 @@ public class recordDao {
             params = appendValue(params,filters.get("ClosedTo"));
         }
         if(filters.has("LocationId")) {
-            sql = sql + "AND lid=? ";
-            params = appendValue(params,filters.get("LocationId"));
+            if (filters.getJSONArray("LocationId").length() > 0) {
+                sql = sql + "AND (lid=? ";
+                params = appendValue(params, filters.getJSONArray("LocationId").get(0));
+                if (filters.getJSONArray("LocationId").length() > 1) {
+                    for (int i = 1; i < filters.getJSONArray("LocationId").length(); i++) {
+                        sql = sql + " OR lid=? ";
+                        params = appendValue(params, filters.getJSONArray("LocationId").get(i));
+                    }
+                }
+                sql = sql + " ) ";
+            }
         }
         if(filters.has("TypeId")) {
-            sql = sql + "AND rtid=? ";
-            params = appendValue(params,filters.get("TypeId"));
+            if (filters.getJSONArray("TypeId").length() > 0) {
+                sql = sql + " AND (rtid=? ";
+                params = appendValue(params, filters.getJSONArray("TypeId").get(0));
+                if (filters.getJSONArray("TypeId").length() > 1) {
+                    for (int i = 1; i < filters.getJSONArray("TypeId").length(); i++) {
+                        sql = sql + " OR rtid=? ";
+                        params = appendValue(params, filters.getJSONArray("TypeId").get(i));
+                    }
+                }
+                sql = sql + " ) ";
+            }
         }
         if(filters.has("ClassName")) {
-            classname = "%" + filters.get("ClassName") + "%";
-            sql = sql + "AND classList LIKE ? ";
-            params = appendValue(params,classname);
+            if (filters.getJSONArray("ClassName").length() > 0) {
+                classname = "%" + filters.getJSONArray("ClassName").get(0) + "%";
+                sql = sql + "AND (classList LIKE ? ";
+                params = appendValue(params, classname);
+                if (filters.getJSONArray("ClassName").length() > 1) {
+                    for (int i = 1; i < filters.getJSONArray("ClassName").length(); i++) {
+                        sql = sql + " OR classList LIKE ? ";
+                        classname = "%" + filters.getJSONArray("ClassName").get(i) + "%";
+                        params = appendValue(params, classname);
+                    }
+                }
+                sql = sql + " ) ";
+            }
         }
         if(filters.has("StateId")) {
-            sql = sql + "AND rsid=? ";
-            params = appendValue(params,filters.get("StateId"));
+            if (filters.getJSONArray("StateId").length() > 0) {
+                sql = sql + "AND (rsid=? ";
+                params = appendValue(params, filters.getJSONArray("StateId").get(0));
+                if (filters.getJSONArray("StateId").length() > 1) {
+                    for (int i = 1; i < filters.getJSONArray("StateId").length(); i++) {
+                        sql = sql + " OR rsid=? ";
+                        params = appendValue(params, filters.getJSONArray("StateId").get(i));
+                    }
+                }
+                sql = sql + " ) ";
+            }
         }
         if(filters.has("SchedId")) {
-            sql = sql + "AND rscid=?  ";
-            params = appendValue(params,filters.get("SchedId"));
+            if (filters.getJSONArray("SchedId").length() > 0) {
+                sql = sql + "AND (rscid=?  ";
+                params = appendValue(params, filters.getJSONArray("SchedId").get(0));
+                if (filters.getJSONArray("SchedId").length() > 1) {
+                    for (int i = 1; i < filters.getJSONArray("SchedId").length(); i++) {
+                        sql = sql + " OR rscid=? ";
+                        params = appendValue(params, filters.getJSONArray("SchedId").get(i));
+                    }
+                }
+                sql = sql + " ) ";
+            }
         }
-        sql = sql + "LIMIT ?,?";
+
+        sql = sql + " LIMIT ?,?";
         Integer offset =pageSize*(page-1);
         params = appendValue(params,offset);
         params = appendValue(params,pageSize);
 
+        System.out.print(sql);
+        System.out.print(params);
 
         List<JSONObject> FTresults = jdbcTemplate.query(sql, new RowMapper<JSONObject>() {
             public JSONObject mapRow(ResultSet resultSet, int Id) throws SQLException {
