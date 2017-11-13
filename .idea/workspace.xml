@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="50232207-8533-40da-802c-8ebd1670e780" name="Default" comment="Various changes">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao.class" afterPath="$PROJECT_DIR$/target/classes/com/duke/Dao/recordDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/duke/controller/GetController.class" afterPath="$PROJECT_DIR$/target/classes/com/duke/controller/GetController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" afterPath="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -49,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GetController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GetController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-901">
-              <caret line="200" column="29" lean-forward="false" selection-start-line="200" selection-start-column="29" selection-end-line="200" selection-end-column="29" />
+            <state relative-caret-position="318">
+              <caret line="301" column="5" lean-forward="true" selection-start-line="301" selection-start-column="5" selection-end-line="301" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,51 +63,54 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recordDao.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="recordDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6720">
-              <caret line="475" column="34" lean-forward="true" selection-start-line="475" selection-start-column="34" selection-end-line="475" selection-end-column="34" />
+            <state relative-caret-position="229">
+              <caret line="562" column="5" lean-forward="true" selection-start-line="562" selection-start-column="5" selection-end-line="562" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#22083#23944#0" expanded="true" />
                 <element signature="e#23943#23944#0" expanded="true" />
                 <element signature="e#24310#24682#0" expanded="true" />
                 <element signature="e#24681#24682#0" expanded="true" />
-                <marker date="1510544504000" expanded="true" signature="1019:1088" ph="SELECT Id,At... customattributevalues" />
-                <marker date="1510544504000" expanded="true" signature="2331:2400" ph="SELECT * FRO... records" />
-                <marker date="1510544504000" expanded="true" signature="4194:4650" ph="SELECT recor... records" />
-                <marker date="1510544504000" expanded="true" signature="7099:7242" ph="select recor... notes" />
-                <marker date="1510544504000" expanded="true" signature="9681:9794" ph="SELECT locat... locations" />
-                <marker date="1510544504000" expanded="true" signature="11104:11263" ph="SELECT * FRO... customattributevalues" />
-                <marker date="1510544504000" expanded="true" signature="12573:12857" ph="SELECT recor... classifications" />
-                <marker date="1510544504000" expanded="true" signature="14124:14571" ph="SELECT recor... records" />
-                <marker date="1510544504000" expanded="true" signature="17330:17467" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="17540:17559" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="17707:17726" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="17874:17893" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="18041:18060" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="18207:18225" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="18371:18389" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="18605:18615" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="18908:18917" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="19087:19089" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="19245:19257" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="19246:19257" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="19538:19548" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="19714:19716" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="19960:19981" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="20240:20260" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="20488:20490" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="20648:20659" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="20943:20953" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="21120:21122" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="21280:21292" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="21577:21588" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="21755:21757" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="21807:21817" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="21808:21817" ph="SELECT * FRO... FullTextTable" />
-                <marker date="1510544504000" expanded="true" signature="24214:24243" ph="SELECT * FRO... records" />
+                <element signature="e#25075#25465#0" expanded="true" />
+                <element signature="e#25464#25465#0" expanded="true" />
+                <marker date="1510545512000" expanded="true" signature="1019:1088" ph="SELECT Id,At... customattributevalues" />
+                <marker date="1510545512000" expanded="true" signature="2331:2400" ph="SELECT * FRO... records" />
+                <marker date="1510545512000" expanded="true" signature="4194:4650" ph="SELECT recor... records" />
+                <marker date="1510545512000" expanded="true" signature="7099:7242" ph="select recor... notes" />
+                <marker date="1510545512000" expanded="true" signature="9681:9794" ph="SELECT locat... locations" />
+                <marker date="1510545512000" expanded="true" signature="11104:11263" ph="SELECT * FRO... customattributevalues" />
+                <marker date="1510545512000" expanded="true" signature="12573:12857" ph="SELECT recor... classifications" />
+                <marker date="1510545512000" expanded="true" signature="14124:14571" ph="SELECT recor... records" />
+                <marker date="1510545512000" expanded="true" signature="17330:17467" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="17540:17559" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="17707:17726" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="17874:17893" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="18041:18060" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="18207:18225" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="18371:18389" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="18605:18615" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="18908:18917" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="19087:19089" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="19245:19257" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="19246:19257" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="19538:19548" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="19714:19716" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="19960:19981" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="20240:20260" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="20488:20490" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="20648:20659" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="20943:20953" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="21120:21122" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="21280:21292" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="21577:21588" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="21755:21757" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="21807:21817" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="21808:21817" ph="SELECT * FRO... FullTextTable" />
+                <marker date="1510545512000" expanded="true" signature="24214:24243" ph="SELECT * FRO... records" />
+                <marker date="1510545512000" expanded="true" signature="24967:25002" ph="SELECT Id,Na... classifications" />
               </folding>
             </state>
           </provider>
@@ -180,8 +185,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/duke/Entity/Classifications.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/React_Full_Project/src/components/PrintQueue/PrintQueue.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java" />
       </list>
     </option>
   </component>
@@ -555,12 +560,12 @@
       <workItem from="1509751889093" duration="11169000" />
       <workItem from="1509999186572" duration="166000" />
       <workItem from="1510463152687" duration="8489000" />
-      <workItem from="1510537831772" duration="6313000" />
+      <workItem from="1510537831772" duration="6932000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81447000" />
+    <option name="totallyTimeSpent" value="82066000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -951,60 +956,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-901">
-          <caret line="200" column="29" lean-forward="false" selection-start-line="200" selection-start-column="29" selection-end-line="200" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/Dao/recordDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6720">
-          <caret line="475" column="34" lean-forward="true" selection-start-line="475" selection-start-column="34" selection-end-line="475" selection-end-column="34" />
+        <state relative-caret-position="229">
+          <caret line="562" column="5" lean-forward="true" selection-start-line="562" selection-start-column="5" selection-end-line="562" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#22083#23944#0" expanded="true" />
             <element signature="e#23943#23944#0" expanded="true" />
             <element signature="e#24310#24682#0" expanded="true" />
             <element signature="e#24681#24682#0" expanded="true" />
-            <marker date="1510544504000" expanded="true" signature="1019:1088" ph="SELECT Id,At... customattributevalues" />
-            <marker date="1510544504000" expanded="true" signature="2331:2400" ph="SELECT * FRO... records" />
-            <marker date="1510544504000" expanded="true" signature="4194:4650" ph="SELECT recor... records" />
-            <marker date="1510544504000" expanded="true" signature="7099:7242" ph="select recor... notes" />
-            <marker date="1510544504000" expanded="true" signature="9681:9794" ph="SELECT locat... locations" />
-            <marker date="1510544504000" expanded="true" signature="11104:11263" ph="SELECT * FRO... customattributevalues" />
-            <marker date="1510544504000" expanded="true" signature="12573:12857" ph="SELECT recor... classifications" />
-            <marker date="1510544504000" expanded="true" signature="14124:14571" ph="SELECT recor... records" />
-            <marker date="1510544504000" expanded="true" signature="17330:17467" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="17540:17559" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="17707:17726" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="17874:17893" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="18041:18060" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="18207:18225" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="18371:18389" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="18605:18615" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="18908:18917" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="19087:19089" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="19245:19257" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="19246:19257" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="19538:19548" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="19714:19716" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="19960:19981" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="20240:20260" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="20488:20490" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="20648:20659" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="20943:20953" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="21120:21122" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="21280:21292" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="21577:21588" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="21755:21757" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="21807:21817" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="21808:21817" ph="SELECT * FRO... FullTextTable" />
-            <marker date="1510544504000" expanded="true" signature="24214:24243" ph="SELECT * FRO... records" />
+            <element signature="e#25075#25465#0" expanded="true" />
+            <element signature="e#25464#25465#0" expanded="true" />
+            <marker date="1510545512000" expanded="true" signature="1019:1088" ph="SELECT Id,At... customattributevalues" />
+            <marker date="1510545512000" expanded="true" signature="2331:2400" ph="SELECT * FRO... records" />
+            <marker date="1510545512000" expanded="true" signature="4194:4650" ph="SELECT recor... records" />
+            <marker date="1510545512000" expanded="true" signature="7099:7242" ph="select recor... notes" />
+            <marker date="1510545512000" expanded="true" signature="9681:9794" ph="SELECT locat... locations" />
+            <marker date="1510545512000" expanded="true" signature="11104:11263" ph="SELECT * FRO... customattributevalues" />
+            <marker date="1510545512000" expanded="true" signature="12573:12857" ph="SELECT recor... classifications" />
+            <marker date="1510545512000" expanded="true" signature="14124:14571" ph="SELECT recor... records" />
+            <marker date="1510545512000" expanded="true" signature="17330:17467" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="17540:17559" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="17707:17726" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="17874:17893" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="18041:18060" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="18207:18225" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="18371:18389" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="18605:18615" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="18908:18917" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="19087:19089" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="19245:19257" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="19246:19257" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="19538:19548" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="19714:19716" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="19960:19981" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="20240:20260" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="20488:20490" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="20648:20659" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="20943:20953" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="21120:21122" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="21280:21292" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="21577:21588" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="21755:21757" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="21807:21817" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="21808:21817" ph="SELECT * FRO... FullTextTable" />
+            <marker date="1510545512000" expanded="true" signature="24214:24243" ph="SELECT * FRO... records" />
+            <marker date="1510545512000" expanded="true" signature="24967:25002" ph="SELECT Id,Na... classifications" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/duke/controller/GetController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="301" column="5" lean-forward="true" selection-start-line="301" selection-start-column="5" selection-end-line="301" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

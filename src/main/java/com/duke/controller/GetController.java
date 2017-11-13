@@ -290,5 +290,16 @@ public class GetController {
         return obj.toString();
     }
 
+    @CrossOrigin
+    @ResponseBody @RequestMapping(value = "/dropdownclass", method = RequestMethod.GET)
+    public java.lang.String GetAllClassifictions() {
+        System.out.print("this GetAllClassification function called");
+
+        JSONObject obj = new JSONObject();
+        List<JSONObject> results=RecordDao.GetAllclassifications();
+        obj.put("results", results);
+        return obj.toString();
+    }
+
 
 }

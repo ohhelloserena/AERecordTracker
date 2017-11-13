@@ -540,6 +540,27 @@ public class recordDao {
         return AllLocations;
     }
 
+    /**
+     * FullText Search classifications dropdown
+     *
+     * Returns a list of classifications {Id, Name} for the classifications dropdown menu
+     */
+
+    public List<JSONObject> GetAllclassifications() {
+
+
+        final String sql = "SELECT Id,Name FROM classifications";
+        List<JSONObject> AllClassifications = jdbcTemplate.query(sql, new RowMapper<JSONObject>() {
+            public JSONObject mapRow(ResultSet resultSet, int Id) throws SQLException {
+                JSONObject classification = new JSONObject();
+                classification.put("classId",resultSet.getInt("Id"));
+                classification.put("className",resultSet.getString("Name"));
+
+                return classification;
+            }
+        });
+        return AllClassifications;
+    }
 
 
 
