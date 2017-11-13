@@ -279,6 +279,16 @@ public class GetController {
         return obj.toString();
     }
 
+    @CrossOrigin
+    @ResponseBody @RequestMapping(value = "/dropdownlocation", method = RequestMethod.GET)
+    public java.lang.String GetAllLocations() {
+        System.out.print("this GetAllLocation function called");
+
+        JSONObject obj = new JSONObject();
+        List<JSONObject> results=RecordDao.GetAllLocation();
+        obj.put("results", results);
+        return obj.toString();
+    }
 
 
 }

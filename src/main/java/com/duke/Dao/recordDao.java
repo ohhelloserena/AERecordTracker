@@ -385,6 +385,7 @@ public class recordDao {
         String sql = "SELECT * FROM FullTextTable WHERE (rNumber LIKE ? OR bNumber LIKE ? OR rTitle LIKE ? OR bTitle LIKE ? OR nTexts LIKE ? OR bcosign LIKE ?) ";
 
         if(filters.has("CreatedStart")) {
+
             sql = sql + "AND rCreatedAt >= ? ";
             params = appendValue(params,filters.get("CreatedStart"));
         }
@@ -468,8 +469,27 @@ public class recordDao {
         return FTresults;
     }
 
+    /**
+     * FullText Search locations dropdown
+     *
+     * Returns a list of locations {locationId,locationName} for the dropdown menu
+     */
+
+    public List<JSONObject> GetAllLocation() {
 
 
+        final String sql = "SELECT Id,Name FROM locations";
+        List<JSONObject> AllLocations = jdbcTemplate.query(sql, new RowMapper<JSONObject>() {
+            public JSONObject mapRow(ResultSet resultSet, int Id) throws SQLException {
+                JSONObject Location = new JSONObject();
+                Location.put("LocationId",resultSet.getInt("Id"));
+                Location.put("LocationName",resultSet.getString("Name"));
+
+                return Location;
+            }
+        });
+        return AllLocations;
+    }
 
 
 
