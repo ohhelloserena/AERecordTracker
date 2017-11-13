@@ -6,7 +6,9 @@ import com.duke.Entity.*;
 //import com.sun.org.apache.xpath.internal.operations.String;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -179,6 +181,27 @@ public class GetController {
         List<record> results=RecordDao.SearchRecordsByConsignmentCode(likeConsignment);
         obj.put("results", results);
         return obj.toString();
+
+        // DO NOT DELETE:
+
+        /*
+
+            if (results.size() < 1) {
+                // no results found
+                // return 404
+                return new ResponseEntity<>("404  No results found", HttpStatus.NOT_FOUND);
+            } else {
+                // results found
+                // return 200
+                obj.put("results", results);
+                return new ResponseEntity<>(obj.toString(), HttpStatus.OK);
+            }
+        } catch (Exception ex) {
+            // return 400
+            String errorMessage = ex + " error";
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+        }
+        */
     }
 
     /**
@@ -201,16 +224,36 @@ public class GetController {
             method = RequestMethod.POST,
             consumes= MediaType.APPLICATION_JSON_VALUE
     )
-    public java.lang.String SearchRecordsByRecordNumber(@RequestBody String params) {
-        System.out.print("this SearchRecordsByRecordNumber respond happened");
+    public ResponseEntity<String> SearchRecordsByRecordNumber(@RequestBody String params) {
+        try {
+        System.out.println("In SearchRecordsByRecordNumber");
         JSONObject obj = new JSONObject();
         JSONObject jsonObj = new JSONObject(params);
-        String likeNumber= jsonObj.getString("number");
-        likeNumber = likeNumber.replaceAll("\\s","");
+        String likeNumber = jsonObj.getString("Number");
+        likeNumber = likeNumber.replaceAll("\\s", "");
 
-            List<record> results = RecordDao.SearchByRecordNumber(likeNumber);
-            obj.put("results", results);
-            return obj.toString();
+        List<record> results = RecordDao.SearchByRecordNumber(likeNumber);
+
+        //obj.put("results", results);
+        //return obj.toString();
+
+            if (results.size() < 1) {
+                // no results found
+                // return 404
+                return new ResponseEntity<>("404  No results found", HttpStatus.NOT_FOUND);
+            } else {
+                // results found
+                // return 200
+                obj.put("results", results);
+                return new ResponseEntity<>(obj.toString(), HttpStatus.OK);
+            }
+        } catch (Exception ex) {
+            // return 404
+            String errorMessage = ex + " error";
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+
+        }
+
     }
 
     /**
