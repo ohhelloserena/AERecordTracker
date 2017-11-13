@@ -394,19 +394,58 @@ class SearchBar extends React.Component {
 
     }
 
+    sendHttpCall(method, url, json) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.onreadystatechange = function () {
+            console.log(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log("result received");
+                return JSON.parse(xhr.responseText);
+            } else if (xhr.status == 404) {
+                return 0;
+            }
+        };
+
+        if (method == "POST") {
+            var body = JSON.stringify(json);
+            xhr.send(body);
+        }
+    }
+
 
     handleSubmitQuickSearch(event) {
         if (this.state.dropdownValue == "Please select quick search attribute:"){
             console.log(JSON.stringify({Error:'No quick search attribute is selected from the dropdown menu'}))
-        };
-        if (this.state.dropdownValue == "Record/Box Number:"){
-            console.log(JSON.stringify({Number:this.state.numberOrConsignmentCode}));
-            //TODO: Something to catch invalid Record/Box Number
-        };
-        if (this.state.dropdownValue == "Consignment Code:"){
-            console.log(JSON.stringify({consignmentCode:this.state.numberOrConsignmentCode}));
-            //TODO: Something to catch invalid Consignmnet Code
-        };
+        }
+
+        var input = this.state.numberOrConsignmentCode.replace(" ", "");
+
+        if (input.length < 5) {
+            console.log("Invalid input - input too short");
+            // TODO: show invalid input warning on UI
+
+        } else {
+            if (this.state.dropdownValue == "Record/Box Number:") {
+                console.log(JSON.stringify({Number: this.state.numberOrConsignmentCode}));
+                var url = "http://127.0.0.1:8080/records/number";
+                var json = {Number: this.state.numberOrConsignmentCode};
+            } else {
+                console.log(JSON.stringify({consignmentCode: this.state.numberOrConsignmentCode}));
+                var url = "http://127.0.0.1:8080/records/consignmentCode";
+                var json = {consignmentCode: this.state.numberOrConsignmentCode};
+            }
+
+            var method = "POST";
+            var result = this.sendHttpCall(method, url, json);
+
+            if (result == 0) {
+                // no results found
+            } else {
+                //TODO: populate result table
+            }
+        }
         event.preventDefault();
     }
 
