@@ -23,6 +23,7 @@ hs_err_pid*
 
 .idea/workspace.xml
 .idea/vcs.xml
+.idea/
 
 #compiled JAR and assorted files
 target/
