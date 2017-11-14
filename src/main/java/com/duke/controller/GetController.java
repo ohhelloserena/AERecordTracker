@@ -240,17 +240,17 @@ public class GetController {
             if (results.size() < 1) {
                 // no results found
                 // return 404
-                return new ResponseEntity<>("404  No results found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<String>("404  No results found", HttpStatus.NOT_FOUND);
             } else {
                 // results found
                 // return 200
                 obj.put("results", results);
-                return new ResponseEntity<>(obj.toString(), HttpStatus.OK);
+                return new ResponseEntity<String>(obj.toString(), HttpStatus.OK);
             }
         } catch (Exception ex) {
             // return 404
             String errorMessage = ex + " error";
-            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST);
 
         }
 
