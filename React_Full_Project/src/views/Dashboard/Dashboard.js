@@ -154,7 +154,7 @@ testData();
 //testDataAxios(window);
 
 //TODO: Uncomment this later (BoxRow, RecordRow)
-/*
+
 class BoxRow extends React.Component {
     render() {
         const box = this.props.box;
@@ -223,7 +223,6 @@ class RecordRow extends React.Component {
         );
     }
 }
-*/
 
 class ResultsTable extends React.Component {
 	render() {
@@ -287,7 +286,7 @@ class SearchBar extends React.Component {
         consignmentCode: '',
 
         typeId: '',
-        locationName: '',
+        locationName: [],
         classification: '',
 
           createdyyyy:'',
@@ -361,7 +360,12 @@ class SearchBar extends React.Component {
 
         dropdownOpen: false,
 
-        dropdownValue: "Please select quick search attribute:"
+        dropdownValue: "Please select quick search attribute:",
+
+        locationDropDownOpen: false,
+
+          arrayOfSelectedLocations: []
+
       };
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmitQuickSearch = this.handleSubmitQuickSearch.bind(this);
@@ -383,21 +387,65 @@ class SearchBar extends React.Component {
          this.toggleCollapseClosedFrom = this.toggleCollapseClosedFrom.bind(this);
          this.toggleCollapseClosedTill = this.toggleCollapseClosedTill.bind(this);
 
+         this.toggleLocationDropdown = this.toggleLocationDropdown.bind(this);
+         this.toggleLocationCheckbox = this.toggleLocationCheckbox.bind(this);
+
+         this.locationDropDownItems = this.locationDropDownItems.bind(this);
+
+    }
+
+    sendHttpCall(method, url, json) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.onreadystatechange = function () {
+            console.log(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log("result received");
+                return JSON.parse(xhr.responseText);
+            } else if (xhr.status == 404) {
+                return 0;
+            }
+        };
+
+        if (method == "POST") {
+            var body = JSON.stringify(json);
+            xhr.send(body);
+        }
     }
 
 
     handleSubmitQuickSearch(event) {
         if (this.state.dropdownValue == "Please select quick search attribute:"){
             console.log(JSON.stringify({Error:'No quick search attribute is selected from the dropdown menu'}))
-        };
-        if (this.state.dropdownValue == "Record/Box Number:"){
-            console.log(JSON.stringify({Number:this.state.numberOrConsignmentCode}))
-            //TODO: Something to catch invalid Record/Box Number
-        };
-        if (this.state.dropdownValue == "Consignment Code:"){
-            console.log(JSON.stringify({consignmentCode:this.state.numberOrConsignmentCode}))
-            //TODO: Something to catch invalid Consignmnet Code
-        };
+        }
+
+        var input = this.state.numberOrConsignmentCode.replace(" ", "");
+
+        if (input.length < 5) {
+            console.log("Invalid input - input too short");
+            // TODO: show invalid input warning on UI
+
+        } else {
+            if (this.state.dropdownValue == "Record/Box Number:") {
+                console.log(JSON.stringify({Number: this.state.numberOrConsignmentCode}));
+                var url = "http://127.0.0.1:8080/records/number";
+                var json = {Number: this.state.numberOrConsignmentCode};
+            } else {
+                console.log(JSON.stringify({consignmentCode: this.state.numberOrConsignmentCode}));
+                var url = "http://127.0.0.1:8080/records/consignmentCode";
+                var json = {consignmentCode: this.state.numberOrConsignmentCode};
+            }
+
+            var method = "POST";
+            var result = this.sendHttpCall(method, url, json);
+
+            if (result == 0) {
+                // no results found
+            } else {
+                //TODO: populate result table
+            }
+        }
         event.preventDefault();
     }
 
@@ -406,12 +454,10 @@ class SearchBar extends React.Component {
 
     handleSubmitFullTextSearch(event) {
 
-        var result =
-            [{
-                fullTextSearch:this.state.fullTextSearch
-            },{filter:[
+        var arrayOfFilters =
+            [
                 (this.state.typeId != '' ? {name:"typeId",type:"EQ",value:this.state.typeId} : undefined),
-                (this.state.locationName != '' ? {name:"locationName",type:"EQ",value:this.state.locationName} : undefined),
+                //locationName used splice(1,0,val)
                 (this.state.classification != '' ? {name:"classification",type:"EQ",value:this.state.classification} : undefined),
 
                 //for: createdAt
@@ -493,13 +539,25 @@ class SearchBar extends React.Component {
 
                 (this.state.stateId != '' ? {name:"stateId",type:"EQ",value:this.state.stateId} : undefined),
                 (this.state.retentionSchedules != '' ? {name:"retentionSchedules",type:"EQ",value:this.state.retentionSchedules} : undefined),
-            ]}];
+            ];
+
+
+        var result =
+            [{
+                fullTextSearch:this.state.fullTextSearch
+            },{filter: arrayOfFilters}];
+
+
+        for (var i = this.state.arrayOfSelectedLocations.length - 1; i >= 0; i--) {
+           result[1]['filter'].splice(1, 0, {name: "locationName", type: "EQ", value: this.state.arrayOfSelectedLocations[i]});
+        }
 
         result[1]['filter'] = result[1]['filter'].filter(function(x) {
             x !== null;
             return x;
         });
         console.log('A bunch of record queries are submitted: ' + JSON.stringify(result));
+        this.state.result = [];//CLEAR RESULTS for initialization
         event.preventDefault();
     }
 
@@ -588,6 +646,63 @@ class SearchBar extends React.Component {
         this.setState({dropdownValue: e.currentTarget.textContent})
       }
 
+      toggleLocationDropdown() {
+        this.setState({
+          locationDropDownOpen: !this.state.locationDropDownOpen
+        });
+      }
+
+      toggleLocationCheckbox(event) {
+         var name = event.target.name;
+
+         if (!this.state.arrayOfSelectedLocations.includes(event.target.name)) {
+             this.state.arrayOfSelectedLocations.push(event.target.name)
+         }
+         else {
+             var index = this.state.arrayOfSelectedLocations.indexOf(event.target.name);
+             if (index > -1) {
+                 this.state.arrayOfSelectedLocations.splice(index, 1);
+             }
+         }
+      }
+
+      //if checked: arrayOfChecked.push
+    //if unchecked: arrayOfchecked.remove
+
+      //TODO: Sample Location Param
+
+      locationDropDownItems() {
+        var listOfLocationDropDownItems = [];
+        var sampleLocationDropDown = [{'name': 'Vancouver', 'id': '5'}, {'name':'Edmonton', 'id': '6'}, {'name': 'Calgary', 'id': '7'}];
+
+        for (var i = 0; i < sampleLocationDropDown.length; i++) {
+
+            listOfLocationDropDownItems.push(<Label check>
+                                         <Input type="checkbox" id = {'location' + sampleLocationDropDown[i]['id']} name = {sampleLocationDropDown[i]['name']} onClick={this.toggleLocationCheckbox}/>{' '}
+                                            {sampleLocationDropDown[i]['name']}
+                                     </Label>);
+
+            //this.state.locationName.push({name:"locationName",type:"EQ",value:sampleLocationDropDown[i]['name']}); //just to test
+
+        }
+
+        //console.log(listOfLocationDropDownItems);
+
+        return listOfLocationDropDownItems;
+               /* <Label check>
+                  <Input type="checkbox" onClick={this.toggleLocationCheckbox}/>{' '}
+                  Check me out
+                </Label>*/
+
+      }
+
+      locationSelectedToList() {
+
+
+
+      }
+
+
     render() {
         return (
       <div>
@@ -670,12 +785,19 @@ class SearchBar extends React.Component {
                                               <Input type="text" name="typeId" value={this.state.typeId} onChange={this.handleChange}/>
                                             </Col>
                                           </FormGroup>
-                                          <FormGroup row>
-                                            <Label for="locationName" sm={20}>Location:</Label>
-                                            <Col sm={10}>
-                                              <Input type="text" name="locationName" value={this.state.locationName} onChange={this.handleChange}/>
-                                            </Col>
-                                          </FormGroup>
+                                            <div>
+                                                <Label for="locationName" sm={20}>Location:</Label>
+                                                <Dropdown isOpen={this.state.locationDropDownOpen} toggle={this.toggleLocationDropdown}>
+                                                  <DropdownToggle caret>
+                                                    Check the locations you would like to search for
+                                                  </DropdownToggle>
+                                                  <DropdownMenu>
+                                                    <DropdownItem>
+                                                        {this.locationDropDownItems()}
+                                                    </DropdownItem>
+                                                  </DropdownMenu>
+                                                </Dropdown>
+                                            </div>
                                           <FormGroup row>
                                             <Label for="classification" sm={20}>Classification:</Label>
                                             <Col sm={10}>
