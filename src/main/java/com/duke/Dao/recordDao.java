@@ -562,10 +562,69 @@ public class recordDao {
         return AllClassifications;
     }
 
+    /**
+     * FullText Search states dropdown
+     *
+     * Returns a list of states {Id, Name} for the states dropdown menu
+     */
+
+    public List<JSONObject> GetAllstates() {
 
 
+        final String sql = "SELECT Id,Name FROM recordstates";
+        List<JSONObject> Allstates = jdbcTemplate.query(sql, new RowMapper<JSONObject>() {
+            public JSONObject mapRow(ResultSet resultSet, int Id) throws SQLException {
+                JSONObject state = new JSONObject();
+                state.put("stateId",resultSet.getInt("Id"));
+                state.put("stateName",resultSet.getString("Name"));
+
+                return state;
+            }
+        });
+        return Allstates;
+    }
+
+    /**
+     * FullText Search record types dropdown
+     *
+     * Returns a list of types {Id, Name} for the types dropdown menu
+     */
+
+    public List<JSONObject> GetAllTypes() {
 
 
+        final String sql = "SELECT Id,Name FROM recordtypes";
+        List<JSONObject> Alltypes = jdbcTemplate.query(sql, new RowMapper<JSONObject>() {
+            public JSONObject mapRow(ResultSet resultSet, int Id) throws SQLException {
+                JSONObject type = new JSONObject();
+                type.put("typeId",resultSet.getInt("Id"));
+                type.put("typeName",resultSet.getString("Name"));
+
+                return type;
+            }
+        });
+        return Alltypes;
+    }
+
+    /**
+     * FullText Search retension schedule dropdown
+     */
+
+    public List<JSONObject> GetAllschedules() {
+
+
+        final String sql = "SELECT Id,Name FROM retentionschedules";
+        List<JSONObject> Allschedules = jdbcTemplate.query(sql, new RowMapper<JSONObject>() {
+            public JSONObject mapRow(ResultSet resultSet, int Id) throws SQLException {
+                JSONObject sched = new JSONObject();
+                sched.put("schedId",resultSet.getInt("Id"));
+                sched.put("schedName",resultSet.getString("Name"));
+
+                return sched;
+            }
+        });
+        return Allschedules;
+    }
 
 
 }

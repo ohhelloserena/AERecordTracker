@@ -301,5 +301,36 @@ public class GetController {
         return obj.toString();
     }
 
+    @CrossOrigin
+    @ResponseBody @RequestMapping(value = "/dropdownstate", method = RequestMethod.GET)
+    public java.lang.String GetAllstates() {
+        System.out.print("this GetAllstates function called");
+
+        JSONObject obj = new JSONObject();
+        List<JSONObject> results=RecordDao.GetAllstates();
+        obj.put("results", results);
+        return obj.toString();
+    }
+    @CrossOrigin
+    @ResponseBody @RequestMapping(value = "/dropdowntype", method = RequestMethod.GET)
+    public java.lang.String GetAlltypes() {
+        System.out.print("this GetAlltypes function called");
+
+        JSONObject obj = new JSONObject();
+        List<JSONObject> results=RecordDao.GetAllTypes();
+        obj.put("results", results);
+        return obj.toString();
+    }
+    @CrossOrigin
+    @ResponseBody @RequestMapping(value = "/dropdownsched", method = RequestMethod.GET)
+    public java.lang.String GetAllscheds() {
+        System.out.print("this GetAllscheds function called");
+
+        JSONObject obj = new JSONObject();
+        List<JSONObject> results=RecordDao.GetAllschedules();
+        obj.put("results", results);
+        return obj.toString();
+    }
+
 
 }
