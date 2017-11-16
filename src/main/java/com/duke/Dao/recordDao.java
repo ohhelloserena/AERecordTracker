@@ -362,17 +362,17 @@ public class recordDao {
 
 
     /**
-     * FullText Search for record by a keyword and a list of filters.
+     * FullText Search for record by a keyword
      *
      * Returns all matched records in FullText table
      *
-     * @param keyword - keyword to search, filters - a list of filters
+     * @param keyword - keyword to search
      * @return
      */
 
 
 
-    public List<JSONObject> FullTextSearch(String keyword, JSONObject filters, Integer page, Integer pageSize) {
+    public List<JSONObject> FullTextSearch(String keyword, Integer page, Integer pageSize) {
 
         Object[] params = new Object[] {};
         keyword = "%" + keyword + "%";
@@ -384,6 +384,7 @@ public class recordDao {
 
         String sql = "SELECT * FROM FullTextTable WHERE (rNumber LIKE ? OR bNumber LIKE ? OR rTitle LIKE ? OR bTitle LIKE ? OR nTexts LIKE ? OR bcosign LIKE ?) ";
 
+        /*
         if(filters.has("CreatedStart")) {
 
             sql = sql + "AND rCreatedAt >= ? ";
@@ -475,7 +476,7 @@ public class recordDao {
                 }
                 sql = sql + " ) ";
             }
-        }
+        }*/
 
         sql = sql + " LIMIT ?,?";
         Integer offset =pageSize*(page-1);

@@ -33,6 +33,15 @@ import classnames from 'classnames';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 
+var responseJSON = {"results":[]};
+var records = [];
+var dashGlobal = {};
+//let filters = [];
+var filters = [{"column":"createdAt","type":"LT","value":[2009, 12, 31]}, {"column":"createdAt","type":"GT","value":[2005, 1, 1]}];
+//var server = "http://ec2-13-59-251-84.us-east-2.compute.amazonaws.com";
+var server = "http://localhost:8080";
+
+
 function getDate(input)
 { //converts the JSON's string date into an array of ints, [year, month, day]
 	return input.split("-", 3).map(function(x){
@@ -42,7 +51,7 @@ function getDate(input)
 
 function callFilter(row, index, arr)
 {
-	for (let criterion of this)
+	for (let criterion in this)
 	{
 		if (['typeId', 'locationId', 'stateId', 'classId'].indexOf(criterion.column) !== -1)
 		{
@@ -89,71 +98,13 @@ function filterJSON(input, crit)
 	return input.filter(callFilter, crit);
 }
 
-var responseJSON = {"results":[]};
-var records = [];
-//let filters = [];
-var filters = [{"column":"createdAt","type":"LT","value":[2009, 12, 31]}, {"column":"createdAt","type":"GT","value":[2005, 1, 1]}];
-
-//call testData to fill table with sample records.
-function testData()
+//given a valid JSON response, updates global variables and tables
+function globalUpdate(response)
 {
-	let request = new XMLHttpRequest();
-	request.open('POST', 'http://127.0.0.1:8080/records/consignmentCode', false);
-	//request.open('POST', 'http://13.59.251.84:8080/records/consignmentCode', false); //for production
-	request.setRequestHeader("Content-type", "application/json");
-
-	request.onload = function() {
-		let comp = [{"column":"createdAt","type":"LT","value":[2009, 12, 31]}, {"column":"createdAt","type":"GT","value":[2005, 1, 1]}];
-		if (this.status >= 200 && this.status < 400) {
-			responseJSON = JSON.parse(this.response).results;
-			records = filterJSON(responseJSON, comp);
-		} else {
-			console.error('Response received and there was an error');
-		}
-	};
-	request.onerror = function() {
-	    //TODO: display error to user
-		console.error('Request error');
-	};
-
-	let body = JSON.stringify({"consignmentCode": "DESTRUCTION CERTIFICATE 2009-01"});
-	request.send(body);
-	console.log("This is the in-memory response JSON:");
-	console.log(responseJSON);
+	responseJSON = response;
+	records = filterJSON(response.results, filters);
+	dashGlobal.update();
 }
-
-function testDataAxios(that)
-{
-	//use Axios
-	axios.post('http://127.0.0.1:8080/records/consignmentCode', {"consignmentCode": "DESTRUCTION CERTIFICATE 2009-01"}, {headers:{"Content-type": "application/json"}})
-		.then(function (response){
-			if(response.status >= 200 && response.status < 400)
-			{
-				console.log("Received response:");
-				console.log(response);
-
-				that.responseJSON = response.data;
-				console.log("Parsed response:");
-				console.log(that.responseJSON);
-
-				that.records = filterJSON(response.data.results, filters);
-				console.log("Filtered response:");
-				console.log(that.records);
-			}
-			else
-			{
-				//TODO: notify user of error
-				console.error("Response received but there was an error, status " + response.status);
-			}
-		}).catch(function(error){
-			console.log(error);
-	});
-}
-
-testData();
-//testDataAxios(window);
-
-//TODO: Uncomment this later (BoxRow, RecordRow)
 
 class BoxRow extends React.Component {
     render() {
@@ -169,7 +120,6 @@ class BoxRow extends React.Component {
         );
     }
 }
-
 
 class RecordRow extends React.Component {
     constructor(props) {
@@ -277,7 +227,7 @@ class ResultsTable extends React.Component {
 class SearchBar extends React.Component {
     //TODO: PAUL'S CODE
 
-     constructor(props) {
+	constructor(props) {
       super(props);
       this.state = {
         Number: 0,
@@ -395,56 +345,55 @@ class SearchBar extends React.Component {
     }
 
     sendHttpCall(method, url, json) {
-        var xhr = new XMLHttpRequest();
-        xhr.open(method, url, true);
-        xhr.setRequestHeader("Content-type", "application/json");
-        xhr.onreadystatechange = function () {
-            console.log(xhr.responseText);
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                console.log("result received");
-                return JSON.parse(xhr.responseText);
-            } else if (xhr.status == 404) {
-                return 0;
-            }
-        };
+		return new Promise(function(resolve, reject)
+		{
+			let xhr = new XMLHttpRequest();
+			xhr.open(method, url, true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					resolve(JSON.parse(xhr.responseText));
+				} else if (xhr.status >= 300) {
+					reject(0);
+				}
+			};
 
-        if (method == "POST") {
-            var body = JSON.stringify(json);
-            xhr.send(body);
-        }
+			if (method === "POST") {
+				let body = JSON.stringify(json);
+				xhr.send(body);
+			}
+		});
     }
 
-
     handleSubmitQuickSearch(event) {
-        if (this.state.dropdownValue == "Please select quick search attribute:"){
+        if (this.state.dropdownValue === "Please select quick search attribute:"){
             console.log(JSON.stringify({Error:'No quick search attribute is selected from the dropdown menu'}))
         }
 
-        var input = this.state.numberOrConsignmentCode.replace(" ", "");
+        let input = this.state.numberOrConsignmentCode.replace(" ", "");
 
         if (input.length < 5) {
             console.log("Invalid input - input too short");
             // TODO: show invalid input warning on UI
 
         } else {
-            if (this.state.dropdownValue == "Record/Box Number:") {
+        	let json = {};
+        	let url = "";
+            if (this.state.dropdownValue === "Record/Box Number:") {
                 console.log(JSON.stringify({Number: this.state.numberOrConsignmentCode}));
-                var url = "http://127.0.0.1:8080/records/number";
-                var json = {Number: this.state.numberOrConsignmentCode};
+                url = "/records/number";
+                json = {Number: this.state.numberOrConsignmentCode};
             } else {
                 console.log(JSON.stringify({consignmentCode: this.state.numberOrConsignmentCode}));
-                var url = "http://127.0.0.1:8080/records/consignmentCode";
-                var json = {consignmentCode: this.state.numberOrConsignmentCode};
+                url = "/records/consignmentCode";
+                json = {consignmentCode: this.state.numberOrConsignmentCode};
             }
 
-            var method = "POST";
-            var result = this.sendHttpCall(method, url, json);
-
-            if (result == 0) {
-                // no results found
-            } else {
-                //TODO: populate result table
-            }
+            let method = "POST";
+            this.sendHttpCall(method, server + url, json).then(function(result)
+            {
+            	globalUpdate(result);
+            });
         }
         event.preventDefault();
     }
@@ -453,111 +402,114 @@ class SearchBar extends React.Component {
 
 
     handleSubmitFullTextSearch(event) {
-
-        var arrayOfFilters =
+        let arrayOfFilters =
             [
-                (this.state.typeId != '' ? {name:"typeId",type:"EQ",value:this.state.typeId} : undefined),
+                (this.state.typeId !== '' ? {name:"typeId",type:"EQ",value:this.state.typeId} : undefined),
                 //locationName used splice(1,0,val)
-                (this.state.classification != '' ? {name:"classification",type:"EQ",value:this.state.classification} : undefined),
+                (this.state.classification !== '' ? {name:"classification",type:"EQ",value:this.state.classification} : undefined),
 
                 //for: createdAt
                 //first case: one date
                 (this.state.collapseCreated
-                && this.state.createdyyyy != ""
-                && this.state.createdmm != ""
-                && this.state.createddd != ""
+                && this.state.createdyyyy !== ""
+                && this.state.createdmm !== ""
+                && this.state.createddd !== ""
                     ? {name:"createdAt",type:"EQ",value:[this.state.createdyyyy, this.state.createdmm, this.state.createddd]} : undefined),
 
                 //second case: from beginning to date
 
                 (!this.state.collapseCreated
                 && this.state.collapseCreatedTill
-                && this.state.createdTillyyyy != ""
-                && this.state.createdTillmm != ""
-                && this.state.createdTilldd != ""
+                && this.state.createdTillyyyy !== ""
+                && this.state.createdTillmm !== ""
+                && this.state.createdTilldd !== ""
                     ? {name:"createdAt",type:"LT",value:[this.state.createdTillyyyy, this.state.createdTillmm, this.state.createdTilldd]} : undefined),
 
                 //third case: from date to beginning
 
                 (!this.state.collapseCreated
                 && this.state.collapseCreatedFrom
-                && this.state.createdFromyyyy != ""
-                && this.state.createdFrommm != ""
-                && this.state.createdFromdd != ""
+                && this.state.createdFromyyyy !== ""
+                && this.state.createdFrommm !== ""
+                && this.state.createdFromdd !== ""
                     ? {name:"createdAt",type:"GT",value:[this.state.createdFromyyyy, this.state.createdFrommm, this.state.createdFromdd]} : undefined),
 
                 //for: updatedAt
                 //first case: one date
                 (this.state.collapseUpdated
-                && this.state.updatedyyyy != ""
-                && this.state.updatedmm != ""
-                && this.state.updateddd != ""
+                && this.state.updatedyyyy !== ""
+                && this.state.updatedmm !== ""
+                && this.state.updateddd !== ""
                     ? {name:"updatedAt",type:"EQ",value:[this.state.updatedyyyy, this.state.updatedmm, this.state.updateddd]} : undefined),
 
                 //second case: from beginning to date
 
                 (!this.state.collapseUpdated
                 && this.state.collapseUpdatedTill
-                && this.state.updatedTillyyyy != ""
-                && this.state.updatedTillmm != ""
-                && this.state.updatedTilldd != ""
+                && this.state.updatedTillyyyy !== ""
+                && this.state.updatedTillmm !== ""
+                && this.state.updatedTilldd !== ""
                     ? {name:"updatedAt",type:"LT",value:[this.state.updatedTillyyyy, this.state.updatedTillmm, this.state.updatedTilldd]} : undefined),
 
                 //third case: from date to beginning
 
                 (!this.state.collapseUpdated
                 && this.state.collapseUpdatedFrom
-                && this.state.updatedFromyyyy != ""
-                && this.state.updatedFrommm != ""
-                && this.state.updatedFromdd != ""
+                && this.state.updatedFromyyyy !== ""
+                && this.state.updatedFrommm !== ""
+                && this.state.updatedFromdd !== ""
                     ? {name:"updatedAt",type:"GT",value:[this.state.updatedFromyyyy, this.state.updatedFrommm, this.state.updatedFromdd]} : undefined),
 
 
                 //TODO: closedAt
 
                 (this.state.collapseClosed
-                && this.state.closedyyyy != ""
-                && this.state.closedmm != ""
-                && this.state.closeddd != ""
+                && this.state.closedyyyy !== ""
+                && this.state.closedmm !== ""
+                && this.state.closeddd !== ""
                     ? {name:"closedAt",type:"EQ",value:[this.state.closedyyyy, this.state.closedmm, this.state.closeddd]} : undefined),
 
                 //second case: from beginning to date
 
                 (!this.state.collapseClosed
                 && this.state.collapseClosedTill
-                && this.state.closedTillyyyy != ""
-                && this.state.closedTillmm != ""
-                && this.state.closedTilldd != ""
+                && this.state.closedTillyyyy !== ""
+                && this.state.closedTillmm !== ""
+                && this.state.closedTilldd !== ""
                     ? {name:"closedAt",type:"LT",value:[this.state.closedTillyyyy, this.state.closedTillmm, this.state.closedTilldd]} : undefined),
 
                 (!this.state.collapseClosed
                 && this.state.collapseClosedFrom
-                && this.state.closedFromyyyy != ""
-                && this.state.closedFrommm != ""
-                && this.state.closedFromdd != ""
+                && this.state.closedFromyyyy !== ""
+                && this.state.closedFrommm !== ""
+                && this.state.closedFromdd !== ""
                     ? {name:"closedAt",type:"GT",value:[this.state.closedFromyyyy, this.state.closedFrommm, this.state.closedFromdd]} : undefined),
 
-                (this.state.stateId != '' ? {name:"stateId",type:"EQ",value:this.state.stateId} : undefined),
-                (this.state.retentionSchedules != '' ? {name:"retentionSchedules",type:"EQ",value:this.state.retentionSchedules} : undefined),
+                (this.state.stateId !== '' ? {name:"stateId",type:"EQ",value:this.state.stateId} : undefined),
+                (this.state.retentionSchedules !== '' ? {name:"retentionSchedules",type:"EQ",value:this.state.retentionSchedules} : undefined),
             ];
 
 
-        var result =
+        let query =
             [{
                 fullTextSearch:this.state.fullTextSearch
             },{filter: arrayOfFilters}];
 
 
-        for (var i = this.state.arrayOfSelectedLocations.length - 1; i >= 0; i--) {
-           result[1]['filter'].splice(1, 0, {name: "locationName", type: "EQ", value: this.state.arrayOfSelectedLocations[i]});
+        for (let i = this.state.arrayOfSelectedLocations.length - 1; i >= 0; i--) {
+           query[1]['filter'].splice(1, 0, {name: "locationName", type: "EQ", value: this.state.arrayOfSelectedLocations[i]});
         }
 
-        result[1]['filter'] = result[1]['filter'].filter(function(x) {
+        query[1]['filter'] = query[1]['filter'].filter(function(x) {
             x !== null;
             return x;
         });
-        console.log('A bunch of record queries are submitted: ' + JSON.stringify(result));
-        this.state.result = [];//CLEAR RESULTS for initialization
+        console.log('A bunch of record queries are submitted: ' + JSON.stringify(query));
+        filters = query[1];
+        this.sendHttpCall("POST", server + "/records/fulltext", {"keyword": query[0]['fullTextSearch'], "page": 1, "pageSize": 500}).then(function(result)
+        {
+        	globalUpdate(result);
+        });
         event.preventDefault();
     }
 
@@ -1170,6 +1122,14 @@ class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
 	};
+
+	componentWillMount()
+	{
+		dashGlobal.update = () => {
+			// `this` refers to our react component
+			this.setState({results: records});
+		};
+	}
 
 	render() {
 		return (
