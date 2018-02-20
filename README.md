@@ -6,6 +6,21 @@ AE Record Tracker is a record-management web app that was made to help Associate
 
 Associated Engineering (AE) has a legacy system called TRIM, which is a full document management system used to manage their paper records. The system is outdated with regard to business need and technology; the company no longer requires a full document management system and TRIM presents technology issues such as operating system and driver support. 
 
+## Features
+
+* 3 levels of user permissions: Regular User, Record Management Coordinator, and Administrator.
+* Quick search by an ID or code.
+* Full text search by a variety of IDs, codes, titles, and/or notes. Partial search inputs are allowed. Results can be filtered by Record Type, Location, Classification, Dates, Record State, and/or Retention Schedules.
+* Record type specific search by a variety of IDs, codes, titles, and/or notes. Partial search inputs are accepted. Results can be filtered by Function, Project Manager/Proposal Manager, and/or Client Name.
+* Create PDF labels to put on records and boxes of records.
+* Create PDF reports for records contained in boxes.
+* CRUD interface to manage types of user permissions. 
+* CRUD interface to manage AE office locations.
+
+## User Documentation
+
+See here: https://github.com/ohhelloserena/AERecordTracker/blob/master/UserDocumentation_TeamAvengers.pdf 
+
 ## Installation Steps
 
 1. `git clone https://github.com/ohhelloserena/AERecordTracker.git`
@@ -17,7 +32,7 @@ Associated Engineering (AE) has a legacy system called TRIM, which is a full doc
 7. Start Spring backend. Currently done through IntelliJ's run, TODO: launch through terminal/script
 8. `npm start`
 
-##Configuration/Release
+## Configuration/Release
 
 1. Assuming Linux backend, install Java JRE and Node package manager. JDK is necessary to compile backend JAR once with builtin database connection properties.
 2. Replace url, username, password at `/src/main/java/resources` with those for the database server
@@ -58,6 +73,11 @@ Back-End:
 * For stress testing of server: Apache JMeter v3.3
 * For unit testing: JUnit 5  
 
-## User Documentation
+## Team Members
 
-See here: https://github.com/ohhelloserena/AERecordTracker/blob/master/UserDocumentation_TeamAvengers.pdf 
+* Serena Chen - back-end
+* Wenyuan Du - back-end
+* Jinmo Kim - front-end
+* Paul Lam - front-end
+* Vincent Tan - back-end
+
